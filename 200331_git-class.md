@@ -6,6 +6,7 @@ me@ulgoon.com
 
 
 
+
 ide
 
 언어를 배울때 philosophy(철학)를 아는게 좋음
