@@ -425,8 +425,6 @@ hexo : node.js
 
 `https://hexo.io/`
 
-
-
 **브류를 이용하여 node.js 설치**
 
 ```
