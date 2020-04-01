@@ -579,30 +579,3 @@ mingui-MacBook-Pro:themes ming$ cd next/
 mingui-MacBook-Pro:next ming$ vi _config.yml
 mingui-MacBook-Pro:next ming$ hexo clean && hexo generate
 ```
-
-
-
-107번줄 : false -> true
-
-
-
-angdoong
-
-ming
-
-layla
-
-lilac
-
-라 일락
-
-layla
-
-coding 
-
-ilac
-
-
-
-
-
