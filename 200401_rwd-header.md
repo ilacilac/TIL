@@ -149,21 +149,21 @@
 
 
 
-```
+```html
 <span class="divider">ㅣ</span>
 ```
 
 위와같이 주면 스크린리더기에서 "이" 라고 읽음 그래서
 
 ```html
-
+<span class="divider" aria-hidden="true">ㅣ</span>
 ```
 
+디자인은 존재하나 스크린리더기에서 읽히지 않도록 `aria-hidden` 속성을 준다.
 
 
 
-
-header에 패딩을 줘서 .memberOnly 탑메뉴 bg 어색한 현상
+**header에 패딩을 줘서 .memberOnly 탑메뉴 bg 어색한 현상**
 
 .memberOnly에 음수마진 적용안됨(margin: 0 -20px;)
 
@@ -212,7 +212,6 @@ Input은 아이콘 크기빼고 늘어나게
 유연한 값을 주어야됨
 
 - clac(값 - 값) / 한칸 꼭 띄워줘야됨
-- buttonSearch / ::after을 준 부분 다시 살펴보자
 - input과 button / html 상 공백문자가 들어가서
   처음이 calc(100% - 30px)이 안먹었던거임
 
