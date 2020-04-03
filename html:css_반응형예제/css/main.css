@@ -162,6 +162,14 @@ body {
   flex-flow: row wrap;
 }
 /* 공통 섹션 제목 */
+.appMain [class*="__title"] {
+  font-size: 1.8rem;
+  padding-top: 0.5rem;
+}
+.appMain [class*="__enTitle"] {
+  display: block;
+}
+
 .sprite {
   height: 60px;
   background-image: url(./images/sprite_main.png);
@@ -171,21 +179,42 @@ body {
 .spriteBook {
   background-position: 0 0;
 }
+.spriteNews {
+  background-position: 0 -230px;
+}
+.spriteBoard {
+  background-position: 0 -115px;
+}
+.spriteTwitter {
+  background-position: 0 -460px;
+}
+.spriteFavorite {
+  background-position: 0 -345px;
+}
 .themeGreen {
   color: #abd375;
+}
+.themeYellow {
+  color: #e8ca58;
+}
+.themeBrown {
+  color: #c7b39a;
+}
+.themeSkyblue {
+  color: #6aaee6;
+}
+.themeOrange {
+  color: #eeab0a;
+}
+.appMain [class*="__summary"] {
+  text-align-last: left;
+  line-height: 1.5;
 }
 .responsive {
     max-width: 100%;
     height: auto;
 }
 /* 공통 추천 서적 */
-.book__title {
-  font-size: 1.8rem;
-  padding-top: 0.5rem;
-}
-.book__enTitle {
-  display: block;
-}
 .book__cover {
   margin-left: 2em;
   margin-right: 2em;
@@ -205,9 +234,68 @@ body {
   display: block;
   font-size: 3rem;
 }
-.book__summary {
-  text-align-last: left;
-  line-height: 1.5;
+
+/* 공통 새소식 */
+.news__videoContainer {
+  margin-left: 0;
+  margin-right: 0;
+}
+.news__date {
+  display: block;
+  text-align: right;
+}
+
+/* 비디오 */
+.iframeContainer {
+  position: relative;
+  width: 100%;
+  height: 0;
+  background-color: yellow;
+}
+.iframe4To3 {
+  padding-top: 70%;
+}
+.iframe16To9 {
+  padding-top: 56.25%;
+}
+.iframe21To9 {
+  padding-top: 42.857142857142855%
+}
+.iframeVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+ 
+/* 게시판 */
+.board {
+  position: relative;
+}
+.board__list li{
+  display: flex;
+  align-items: center;
+  margin: 0.5em 0;
+}
+.board__list a {
+  overflow: hidden;
+  white-space: nowrap;
+  flex-grow: 1; 
+  text-overflow: ellipsis;
+  padding: 0.5em 0;
+}
+.board__list time {
+  margin-left: 0.5em;
+}
+.board__list .icon-star::before {
+  vertical-align: middle;
+}
+.board__more {
+  position: absolute;
+  right: -0.5em;
+  top: 1em;
+  padding: 0.5em;
 }
 @media screen and (max-width: 999px) {
   /* 모바일 디바이스 */
@@ -390,7 +478,7 @@ body {
     width: 100%;
   }
   .appFooter {
-    height: 15vh;
+    
   }
 }
 @media screen and (min-width: 1000px) {

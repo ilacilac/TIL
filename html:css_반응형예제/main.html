@@ -98,10 +98,74 @@
                     </p>
                 </dl>
             </section>
-            <section class="news">새소식</section>
-            <section class="board">게시판</section>
-            <article class="twitter">트위터</article>
-            <section class="favorite">인기사이트</section>
+            <section class="news">
+              <h2 class="news__title sprite spriteNews">
+                새소식 <span class="news__enTitle themeYellow" lang="en">WebCafe News</span>
+			  </h2>
+			  <figure class="news__videoContainer">
+				<!-- <video class="news__video responsive" poster="./media/poster.jpg" controls>
+				  <source src="./media/stories.mp4" type="video/mp4" />
+				  <track
+						 src="./media/stories-en.vtt"
+						 kind="captions"
+						 srclang="en"
+						 label="English Caption" />
+				</video> -->
+				<div class="iframeContainer iframe4To3">
+					<iframe class="iframeVideo" src="https://www.youtube.com/embed/h_sh7qjFYSY?start=7" frameborder="0" allowfullscreen></iframe>
+				</div>
+				<figcaption class="a11yHidden">구글 개발자 이야기</figcaption>
+			  </figure>
+			  <p class="news__summary">
+				구글플레이는 다양한 분야에서 활약하고 있는 국내 개발사들을 모시고 직접
+				이야기를 나눠보는 ‘구글플레이 개발자와의 대화’ 행사를 정기적으로
+				개최할 예정입니다. 오늘 3월 29일(수) 구글 캠퍼스 서울에서 열린 첫 번째
+				‘구글플레이 개발자와의 대화’는 ‘해외에서 빵터진 한국 앱'을 주제로
+				진행됐는데요, 국내 앱 시장은 물론 글로벌 시장에서도 주목 받으며 글로벌
+				진출의 본보기가 되고 있는 개발사 세 곳과 함께 했습니다.
+			  </p>
+			  <time class="news__date" datetime="2020-04-03T14:03:23">
+				<span class="icon-calendar">2020.04.03</span>
+			  </time>
+            </section>
+            <section class="board">
+				<h2 class="board__title sprite spriteBoard">
+					게시판 <span class="board__enTitle themeBrown common__enTitle" lang="en">WebCafe Board</span>
+				</h2>
+				<ul class="board__list resetList">
+					<li class="icon-star">
+					  <a href="#">HTML의 모든 것을 알려주마 샘플 활용법</a>
+					  <time datetime="2019-11-27T11:44:30">2019.11.27</time>
+					</li>
+					<li class="icon-star">
+					  <a href="#">W3C 사이트 리뉴얼 및 공지사항</a>
+					  <time datetime="2019-11-27T11:44:30">2019.11.27</time>
+					</li>
+					<li class="icon-star">
+					  <a href="#">KWCAG 2.1 소식</a>
+					  <time datetime="2019-11-27T11:44:30">2019.11.27</time>
+					</li>
+					<li class="icon-star">
+					  <a href="#">서버 점검으로 인한 사이트 이용안내 입니다.</a>
+					  <time datetime="2019-11-27T11:44:30">2019.11.27</time>
+					</li>
+					<li class="icon-star">
+					  <a href="#">여러분들이 생각하는 웹 접근성에 대해 이야기를 나누어 봅시다.</a>
+					  <time datetime="2019-11-27T11:44:30">2019.11.27</time>
+					</li>
+				  </ul>
+				  <a href="/" title="게시판" class="board__more"><span class="icon-plus themeBrown"></span>더보기</a>
+			</section>
+            <article class="twitter">
+				<h2 class="twitter__title sprite spriteTwitter">
+					트위터 <span class="twitter__enTitle themeSkyblue common__enTitle" lang="en">WebCafe Twitter</span>
+				</h2>
+			</article>
+            <section class="favorite">
+				<h2 class="favorite__title sprite spriteFavorite">
+					인기 사이트 <span class="favorite__enTitle themeOrange common__enTitle" lang="en">Favorite Site</span>
+				</h2>
+			</section>
         </main>
         <footer class="appFooter">푸터</footer>
     </div>
