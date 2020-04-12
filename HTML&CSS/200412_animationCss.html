@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .demo {
+        border-top: 100px solid #ccc;
+        height: 300px;
+        color: red;
+        }
+
+        @keyframes grow {
+            0% { font-size: 0; color: #000; }
+            100% { font-size: 40px; color: blueviolet; }
+        }
+
+        .demo:hover .grows {
+            animation-name: grow;
+            animation-duration: 3s;
+            animation-delay: 1s;
+            animation-fill-mode: backwards;
+            /* 애니메이션 스타일을 애니메이션이 실제로 시작하기 전에 미리 적용 */
+        }
+
+        .demo:hover .growsandstays {
+            animation-name: grow;
+            animation-duration: 3s;
+            animation-delay: 1s;
+            animation-fill-mode: forwards;
+            /* 애니메이션 키프레임이 100% 도달했을 때 마지막 키프레임을 유지 */
+        }
+        .demo:hover .growsboth {
+            animation-name: grow;
+            animation-duration: 3s;
+            animation-delay: 1s;
+            animation-fill-mode: both;
+            /* forwards, backward를 둘다 적용*/
+        }
+    </style>
+</head>
+<body>
+    <p>회색 박스 위에 마우스를 올려보세요!</p>
+    <div class="demo">
+        <div class="grows">animation-fill-mode: backwards;</div>
+        <div class="growsandstays">animation-fill-mode: forwards;</div>
+        <div class="growsboth">animation-fill-mode: both;</div>
+    </div>
+</body>
+</html>
