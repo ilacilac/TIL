@@ -1,0 +1,216 @@
+/* Styling Layout */
+/* 스킵네비게이션 */
+.skip__nav a {
+    position: fixed;
+    top: -100%;
+    z-index: 9999;
+    display: block;
+    width: 224px;
+    padding: 10px 0 10px 10px;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    box-sizing: border-box;
+    background: #14182C;
+}
+.skip__nav a:focus {
+    top: 80px;
+}
+/* main */
+.main {
+    max-width: 840px;
+    margin: 0 auto; 
+}
+.drink__list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    padding: 95px 15px 50px;
+    box-sizing: border-box;
+}
+.drink__item {
+    position: relative;
+    width: calc(50% - 28px);
+    margin-bottom: 15px;
+    padding: 10px 10px 3rem 10px; 
+    background: #f5f5f5;
+}
+.drink__item01 {
+    opacity: 0;
+    animation: ani__drink--item 1s 0.6s forwards;
+}
+.drink__item02 {
+    opacity: 0;
+    animation: ani__drink--item 1s 0.8s forwards;
+}
+.drink__item03 {
+    opacity: 0;
+    animation: ani__drink--item 1s 1.0s forwards;
+}
+.drink__item04 {
+    opacity: 0;
+    animation: ani__drink--item 1s 1.2s forwards;
+}
+.drink__item figure {
+    text-align: center;
+}
+.drink__item img {
+    transform: scale(0.9);
+    transition: all 0.2s;
+}
+.drink__item:hover img{
+    transform: scale(1);
+}
+.drink__item.active:hover img{
+    transform: scale(0.9);
+}
+.drink__item figcaption {
+    margin: 10px 0;
+}
+.drink__info {
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-indent: -9999px;
+} 
+.drink__image--container {
+    display: inline-block;
+    width: 60%;
+}
+
+.drink__item img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 음료 상세정보 */
+.drink__item.active .drink__detail {
+    /* display: block; */
+    visibility: visible;
+}
+.drink__detail {
+    /* display: none; */
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.8);
+}
+.drink__detail h3 {
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: normal;
+}
+.drink__detail h3 span {
+    display: block;
+    font-size: 14px;
+    line-height: 21px;
+    color: #999;
+}
+.drink__detail h3::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    margin-top: 1.5rem;
+    background: #202023;
+}
+.drink__detail p {
+    margin-top: 1.5rem;
+    font-size: 1.6rem;
+    line-height: 1.4;
+    word-break: keep-all; /* 가독성을 위해 넣음 */
+}
+.detail__btn--close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    padding: 25px;
+    background-image: url(../images/2X/icon/detail_close.png);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 25px;
+    transition: all 0.4s;
+}
+.detail__btn--close:hover {
+    background-color: #f3f3f3 ;
+}
+/* 음료 영양성분 */
+.detail__table--ingre {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 5px 0px;
+    font-size: 1.3rem;
+    background: #f8f8f8;
+
+    /* display: block;
+    table-layout: fixed;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box; */
+  
+}
+/* 음료 영양성분 테이블 가운데 구분선 */
+.drink__detail.active::after {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 1px;
+    height: 100%;
+    background: #000;
+}
+/* 한 행에 2셀을 넣겐단 의미에서 마크업 수정 */
+.detail__table--ingre th {
+    width: 25%;
+    padding-left: 20px;
+    font-weight: normal;
+}
+.detail__table--ingre td {
+    width: 25%;
+}
+.detail__table--ingre tbody::after { 
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    width: 1px;
+    height: 50px;
+    background: #ccc;
+}
+
+@keyframes ani__drink--item {
+    0% {
+        transform: translate(0, 40px);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .drink__list {
+        width: 100%;
+        flex-flow: column wrap;
+
+    }
+    .drink__item {
+        width: 100%;
+        box-sizing: border-box; /* 0407 :: li 모바일크기에서 가로스크롤 생기는 이슈 수정 */
+    }
+}
+
