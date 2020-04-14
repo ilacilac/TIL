@@ -341,3 +341,46 @@ const add01 = (a, b) => {
 const add01 = (a, b) => a + b;
 ```
 
+
+
+객체
+
+```javascript
+const dog = {
+  name: '멍멍이',
+  sound: '멍멍!',
+  say: function say() {
+      console.log(this.sound);
+  }
+};
+dog.say(); // 멍멍!
+
+const dog = {
+  name: '멍멍이',
+  sound: '멍멍!',
+  say: () => {
+      console.log(this); // undefined
+      console.log(this.sound); // TypeError: Cannot read property 'sound' of undefined
+  }
+};
+dog.say();
+/*
+this가 무엇인지 모른다
+function 키워드로 만들었을땐 this는 자기가 속해있는곳을 가르키는데 
+화살표 함수에서는 연결하지 않아 작동하지 않는다.
+*/
+
+const cat = {
+    name: '야옹이',
+    sound: '야옹~'
+};
+
+cat.say = dog.say;
+dog.say(); // 멍멍!
+cat.say(); // 야옹~
+const catSay = cat.say;
+catSay(); // undefined
+
+/* 특정값을 바꾸거나 조회를할 때 우리가 원하는 코드를 실행 할 수 있다. */
+```
+
