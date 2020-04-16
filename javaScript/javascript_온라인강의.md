@@ -456,3 +456,208 @@ numbers.a = 9;
 console.log(numbers.sum); // 16
 ```
 
+
+
+## 배열
+
+배열은 여러개의 항목이 들어있는 리스트와 같음
+
+```javascript
+const array = [1,2,3,4,5];
+console.log(array[0]); // 1
+
+const objects = [
+    { name: '멍멍이' },
+    { name: '야옹이' }
+];
+console.log(objects.length); // 2
+objects.push(
+    { name: '멍뭉이'}
+);
+console.log(objects); 
+/*
+(3) [{…}, {…}, {…}]
+0: {name: "멍멍이"}
+1: {name: "야옹이"}
+2: {name: "멍뭉이"}
+*/
+console.log(objects.length); // 3
+```
+
+
+
+## 반복문
+
+특정작업을 반복적으로 할때 사용하는 구문
+
+시작 -> 조건확인(true, false) -> 구문실행 -> 조건 false시 끝남
+
+### for
+
+```javascript
+for (let i = 0; i < 10; i++) {
+    console.log(i);
+}
+
+for (let i = 10; i > 0; i--) {
+    console.log(i);
+}
+
+for (let i = 10; i > 0; i-=2) {
+    console.log(i);
+}
+
+const names = ['멍멍이', '뭉뭉이', '멍뭉이'];
+for (let i = 0; i < names.length; i++) {
+    console.log(names[i]);
+}
+
+```
+
+
+
+### while
+
+조건이 조금 더 숫자가아닌 값이 true가 됬을 때 와같이 까다로울 때 사용함
+
+```javascript
+let i = 0;
+let isFun = false;
+
+while (!isFun){
+    console.log(i);
+    i++;
+    if (i === 30) {
+        isFun = true;
+    }
+}
+```
+
+
+
+### for of
+
+배열을 다루게 될 때 사용하는 반복문
+
+```javascript
+const numbers = [10, 20, 30, 40, 50];
+for (let number of numbers) {
+    console.log(number);
+} // number이 가르킨게 10, 20, 30, 40, 50
+```
+
+
+
+### for in
+
+객체를 다루게 될 때 사용하는 반복문
+
+```javascript
+const doggy = {
+    name: '멍멍이',
+    sound: '멍멍',
+    age: 2
+};
+
+console.log(Object.keys(doggy)); // (3) ["name", "sound", "age"]
+console.log(Object.values(doggy)); // (3) ["멍멍이", "멍멍", 2]
+console.log(Object.entries(doggy)); // (3) [Array(2), Array(2), Array(2)]
+```
+
+
+
+### continue & break
+
+continue : 해당 조건에 충족될 때 다음코드를 실행시킴
+
+break : 해당 조건에 충족될 때 멈춤
+
+```javascript
+for (let i = 0; i < 10; i++) {
+  if (i === 2) continue; 
+  console.log(i);
+  // 0
+  // 1
+  // 3
+  // 4
+  // 5
+  if (i === 5) break;
+}
+```
+
+
+
+```javascript
+function sumOf(numbers) { // 2. 파라미터로 받아오고
+    let sum = 0;
+    for (let i = 0; i < numbers.length; i++) { // 3. 반복문을돌고
+        sum += numbers[i]; // 4. 값을 더하고
+    }
+    return sum; // 5. 값을 반환한걸 result로 전달
+}
+const result = sumOf([1, 2, 3, 4, 5]); // 1. 인자를 넣고
+console.log(result); // 15
+
+// 문제
+// 숫자로 이루어진 배열이 주어졌을 때, 해당 숫자 배열안에 들어있는 숫자 중 3보다 큰 숫자로만 이루어진 배열을 새로 만들어서 반환해보세요.
+
+function biggerThanThree(numbers) {
+	const array = [];
+  for (let i = 0; i < numbers.length; i++) {
+    if (numbers[i] > 3) {
+      array.push(numbers[i]);
+    }
+  }
+  return array;
+}
+
+const numbers = [1, 2, 3, 4, 5, 6, 7];
+console.log(biggerThanThree(numbers)); // [4, 5, 6, 7]
+```
+
+
+
+다시풀어보기
+
+```javascript
+function numberFillter(numbers) {
+  const newArray = [];
+  for (let i = 0; i < numbers.length; i++) {
+    // i = 0 ~ 6
+    if (numbers[i] > 3) {
+      // numbers[0] > 3 // 1 (false)
+      // numbers[1] > 3 // 2 (false)
+      // numbers[2] > 3 // 3 (false)
+      newArray.push(numbers[i]);
+    }
+  }
+  return newArray; // for문이 다 돌고 리턴해줘야함 안그러면 반복문 돌다 멈춤
+}
+const numbers = [1, 2, 3, 4, 5, 6, 7];
+// numbers.length = 7
+//
+numberFillter(numbers);
+console.log(numberFillter(numbers));
+
+```
+
+
+
+응용해서 홀수필터 만들어보자
+
+```javascript
+function fillterOddNum(num) {
+  const newArr = [];
+  for (let i = 0; i < num.length; i++) {
+    if (num[i] % 2){ 
+      newArr.push(num[i]);    
+    }
+  }
+  return newArr;
+}
+
+const numbers = [1,2,3,4,5,6,7];
+fillterOddNum(numbers);
+console.log(fillterOddNum(numbers));
+```
+
