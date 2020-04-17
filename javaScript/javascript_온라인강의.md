@@ -661,3 +661,78 @@ fillterOddNum(numbers);
 console.log(fillterOddNum(numbers));
 ```
 
+
+
+### forEach
+
+```javascript
+const superHeroes = ['아이언맨', '캡틴 아메리카', '토르', '닥터 스트레인지'];
+for (let i = 0; i < superHeroes.length; i++) {
+    console.log(superHeroes[i]);
+}
+
+// 위의 예제 간단하게
+function print(hero) {
+    console.log(hero)
+}
+superHeroes.forEach(print);
+
+// 더 간단하게
+superHeroes.forEach(function(hero) {
+    console.log(hero);
+});
+
+// 화살표 함수
+superHeroes.forEach(hero => {
+    console.log(hero);
+});
+```
+
+```javascript
+let testArr = ['a', 'b', 'c']
+let ulList = document.querySelector('ul');
+
+testArr.forEach(function(v) {
+  ulList.innerHTML += '<li><a href="#">' + v + '</a></li>';  
+});
+```
+
+
+
+```javascript
+var testLis = document.querySelectorAll("ul li");
+for (var i = 0; i < testLis.length; i++) {
+  testLis[i].addEventListener("click", () => {
+    alert(i);
+  });
+}
+// or
+for (var i = 0; i < 10; i++) {
+  console.log(i);
+  setTimeout(function() {
+    console.log('i', i);
+  }, 1000);
+}
+// 첫 번째 setTimeout()실행 시점에
+// i이미 10에 도달했으므로 10을 참조하여 모두 10이 찍힘
+
+
+// 해결방법 01
+//  var가 function-scope인 점을 이용하자
+(function() {
+  // var 변수는 여기까지 hoisting이 된다.
+  for(var i=0; i<10; i++) {
+    // console.log('i', i)
+  }
+})();
+
+// 해결방법 02
+// block-scope인 let을 사용하자
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+  setTimeout(function() {
+    console.log('i', i);
+  }, 1000);
+}
+```
+
