@@ -736,3 +736,223 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
+
+
+### map
+
+모든원소를 변환하고 싶을 때 사용
+
+```javascript
+// array의 제곱된값을 넣고싶을때
+const array = [1,2,3,4,5,6,7,8,9];
+const squared = []; 
+
+// 방법1
+for (let i = 0; i < array.length; i++) {
+  squared.push(array[i]);
+}
+
+// 방법2
+array.forEach(function(n) {
+  squared.push(n * n);
+});
+
+// 방법2를 화살표함수로
+array.forEach(n => {
+  squared.push(n * n);
+});
+
+// map을 이용해보자, 빈 배열 필요없어
+const array = [1,2,3,4,5,6,7,8,9];
+var square = n => n * n;
+var squared = array.map(square);
+console.log(squared);
+
+// 더 간단하게 map()안에 함수를 넣어주면 됨
+const array = [1,2,3,4,5,6,7,8,9];
+var squared = array.map(n => n * n;);
+
+// map을 통해 객체 안의 텍스트를 뽑아 배열로 만들기
+const items = [
+    {
+        id: 1,
+        text: 'hello'
+    }, {
+        id: 2,
+        text: 'bye'
+    }
+];
+const texts = items.map(item => item.text);
+console.log(texts); // ["hello", "bye"]
+
+```
+
+```javascript
+// 특정항목이 배열에서 몇번째 원소인지 알고 싶을때
+// 배열의 내장함수 indexOf()를 사용하면 됨
+// 배열 값이 객체이거나 조건으로 찾아야 할때는 적합하지 않음
+const superHeroes = ['아이언맨', '캡틴 아메리카', '토르', '닥터 스트레인지'];
+const index = superHeroes.indexOf('토르'); // 토르의 index값을 찾자
+console.log(index); // 2
+
+
+// 특수한 조건에서의 인덱스를 찾을 때
+// id가 3인 index를 알고싶어!
+const todos = [
+    {
+        id: 1,
+        text: '자바스크립트 입문',
+        done: true,
+    }, {
+        id: 2,
+        text: '함수 배우기',
+        done: true,
+    }, {
+        id: 3,
+        text: '객체와 배열 배우기',
+        done: true,
+    }, {
+        id: 4,
+        text: '배열 내장함수 배우기',
+        done: false
+    }
+]
+
+// 아래와 같이 찾으면 일치하는게 없기때문에 -1 반환
+const index = todos.indexOf(3);
+console.log(index); // -1
+
+// findIndex를 사용해야함
+const index = todos.findIndex(todo => todo.id === 3);
+console.log(index); // 2
+
+// find하게 되면 그 객체자체 혹은 원소 자체를 반환한다
+const todo = todos.find(todo => todo.id === 3);
+console.log(todo); 
+// {id: 3, text: "객체와 배열 배우기", done: true}
+
+
+/* 
+	indexOf, find, findIndex는 가장 첫번째로 찾은 값을 반환시켜준다
+	
+	indexOf : 특정 값이랑 일치 
+	findIndex : 내부에 함수를 넣어줘서 특정값을 조건으로 찾음 
+	find : 찾은 값 자체를 반환
+*/
+
+```
+
+
+
+### fillter
+
+특정조건에 만족하는 원소들을 찾아서 새로운 배열을 만듬
+
+```javascript
+const todos = [
+    {
+        id: 1,
+        text: '자바스크립트 입문',
+        done: true,
+    }, {
+        id: 2,
+        text: '함수 배우기',
+        done: true,
+    }, {
+        id: 3,
+        text: '객체와 배열 배우기',
+        done: true,
+    }, {
+        id: 4,
+        text: '배열 내장함수 배우기',
+        done: false
+    }
+];
+
+const tasksNotDone = todos.filter(todo => todo.done === false);
+console.log(tasksNotDone); // [{…}]
+
+const tasksNotDone = todos.filter(todo => todo.done === true);
+console.log(tasksNotDone); // (3) [{…}, {…}, {…}]
+
+const tasksNotDone = todos.filter(todo => !todo.done);
+console.log(tasksNotDone); // [{…}]
+```
+
+
+
+### **Splice & slice**
+
+```javascript
+const numbers = [10,20,30,40];
+const index = numbers.indexOf(30);
+const spliced = numbers.splice(index, 2); // index부터 2개를 지울거다
+
+console.log(spliced); // [30, 40]
+console.log(numbers); // [10, 20]
+
+const numbers = [10, 20, 30, 40];
+const sliced = numbers.slice(0, 2); // 0부터 시작해서 2전까지
+console.log(sliced); // [10, 20];
+console.log(numbers); // [10, 20, 30, 40];
+
+// splice는 원본 배열을 건드린다.
+// slice는 원본 배열을 건드리지 않는다.
+```
+
+
+
+### shift & pop
+
+shift 첫번째 원소를 배열에서 추출해준다.
+pop은 shift랑 반대로 마지막에서 추출한다.
+기존 배열을 수정한다.
+
+```javascript
+const numbers = [10, 20, 30, 40];
+const value = numbers.shift();
+console.log(value); // 10
+console.log(numbers); // [20, 30, 40]
+
+const numbers = [10, 20, 30, 40];
+const value = numbers.pop();
+console.log(value); // 40
+console.log(numbers); // [10, 20, 30]
+
+const numbers = [10, 20, 30, 40];
+numbers.unshift(5);
+console.log(numbers); // [5, 10, 20, 30, 40]
+// push pop / shift unshift
+```
+
+
+
+### concat
+
+여러개의 배열을 하나로 합쳐준다.
+기존의 배열을 수정하지 않는다.
+결과를 새로운 배열을 만들어서 변수에 담는다.
+
+```javascript
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const concated = arr1.concat(arr2);
+console.log(concated);
+
+```
+
+
+
+### join
+
+배열에 있는값을 문자열로 합쳐줄 때 사용
+
+```javascript
+const array = [1, 2, 3, 4, 5];
+console.log(array.join()); // 1,2,3,4,5 
+console.log(array.join(' ')); // 1 2 3 4 5  
+// ()안에 어떻게 구별할지 쉼표나 공백같은 값을 넣어줘야함
+```
+
+
+
