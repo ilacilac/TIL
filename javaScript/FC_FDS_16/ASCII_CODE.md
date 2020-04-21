@@ -12,11 +12,11 @@
 
 ## ASCII CODE
 
-- ASCII(American Standard Code for Information Interchange = 미국 정보 교환 표준 부호)
+- 미국 정부 교환 표준 부호이다.
 
-- 라틴 알파벳, 숫자, 특수 문자 등을 정수와 그에 대응되는 7비트 이진수로 표현하는 대표적인 **[문자 인코딩](https://ko.wikipedia.org/wiki/문자_인코딩)**이다. 
+- 라틴 알파벳, 숫자, 특수문자로 이루어져있다.
 
-- 아스키는 컴퓨터와 통신 장비를 비롯한 문자를 사용하는 많은 장치에서 사용되며, 대부분의 문자 인코딩이 아스키에 기초를 두고 있다.
+- 문자를 사용하는 많은 장치에서 사용하고 기초를 두고있다.
 
 
 
@@ -31,6 +31,7 @@
 > 아스키코드로 다른언어를 표현하기에 7비트로 부족했다.
 >
 > 그래서 8비트로 확장한 ASCII코드가 나왔다. (0 ~ 256개의 값 저장가능)
+> = ANSI CODE
 >
 > 확장하였음에도 불구하고 문자가 많은 국가에게서는 여전히 제한적이었음
 > (우리나라같은경우) -> 그래서 유니코드가 등장하였다.(하단 참고)
@@ -45,12 +46,13 @@
 
 > ex) 영어 : a - z. 
 > 	  한글 : 가 ~ 힣 
+>
+> 영어와 한글은 문자집합이라 할 수 있다.
 
-이러한 문자 집합을 코드형태로 표기한 것을 코드화된 
-**문자 집합** 이라 한다.
+이러한 문자 집합을 코드형태로 표기한 것을 **코드화된 문자 집합**(CCS) 이라 한다.
 
-> ex) '가'에는 10001, '각'에는 10002와 같이 
-> 코드를 할당하는 방식
+> ex) '가'에는 10001, '각'에는 10002와 같이 코드를 할당하는방식
+> (위에서 말한 영어와 한글(문자집합)에 정수값을 부여하는 방식)
 
 
 
@@ -59,6 +61,8 @@
 문자집합을 컴퓨터에서 저장하거나 통신에 사용할 목적으로 
 옥텟(octet, 8비트 단위) 형태로 표현 하는 것을 
 **문자 인코딩**이라 한다.
+
+>  UTF, EUC-KR ...
 
 
 
@@ -75,18 +79,26 @@
 
 
 
-## CODE PAGE
+## UTF-8
 
-특정한 [문자 인코딩](https://ko.wikipedia.org/wiki/문자_인코딩) 테이블을 위해 쓰이는 전통적인 [IBM](https://ko.wikipedia.org/wiki/IBM) 용어이다. 
-문자 인코딩 테이블은 0부터 255까지의 정수를 표현하는 단일 [옥텟](https://ko.wikipedia.org/wiki/옥텟)(octet, 바이트)이라고 불리는 
-일련의 비트들이 특정한 [문자](https://ko.wikipedia.org/wiki/문자)와 결합하여 도표화(mapping)한 것이다. 
-[IBM](https://ko.wikipedia.org/wiki/IBM)과 [마이크로소프트](https://ko.wikipedia.org/wiki/마이크로소프트)는 코드 페이지를 [문자열 집합](https://ko.wikipedia.org/wiki/문자열_집합)(*charset*)에 자주 할당한다.
-
+- UTF-8은 유니코드를 위한 가변 길이 문자 인코딩 방식
+- UTF-8 인코딩은 유니코드 한 문자를 나타내기 위해 1바이트에서 4바이트까지를 사용 (최대6바이트이지만 호환을 위해)
+- ASCII 문자들은 UTF-8에서 1바이트만으로 표시된다. 
 
 
-참고 : https://ko.wikipedia.org/wiki/ASCII
-[https://ko.wikipedia.org/wiki/%EB%AC%B8%EC%9E%90_%EC%9D%B8%EC%BD%94%EB%94%A9](https://ko.wikipedia.org/wiki/문자_인코딩)
-https://nuli.navercorp.com/sharing/blog/post/1079940
-https://d2.naver.com/helloworld/19187
-https://whatisthenext.tistory.com/103
-[https://ko.wikipedia.org/wiki/%EC%BD%94%EB%93%9C_%ED%8E%98%EC%9D%B4%EC%A7%80](https://ko.wikipedia.org/wiki/코드_페이지)
+
++++
+
+### 참조자료
+
+1. 영어 위키피디아 : https://ko.wikipedia.org/wiki/ASCII
+
+2. 한글 위키피디아 : [https://ko.wikipedia.org/wiki/문자_인코딩](https://ko.wikipedia.org/wiki/문자_인코딩)
+
+3. NULI : https://nuli.navercorp.com/sharing/blog/post/1079940
+
+4. NAVER D2 : https://d2.naver.com/helloworld/19187
+
+5. blog : https://whatisthenext.tistory.com/103
+
+   ​		: https://giraffeb.tistory.com/83
