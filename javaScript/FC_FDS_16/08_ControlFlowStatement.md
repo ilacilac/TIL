@@ -211,9 +211,136 @@ switch (표현식) {
 
 
 
+if...else 문의 조건식 : 불리언 값으로 평가되어야 함
+switch 문의 표현식 : 문자열, 숫자 값인경우가 많다
+= 논리적 참, 거짓보다는 다양한 상황(case)에 따라 실행할 코드 블록을 결정할 때 사용한다.
+
+```javascript
+var month = 11;
+var monthName;
+
+switch (month) {
+	case 1: monthName = 'January';
+  case 2: monthName = 'February';
+  case 3: monthName = 'March';
+  case 4: monthName = 'April';
+  case 5: monthName = 'May';
+  case 6: monthName = 'June';
+  case 7: monthName = 'July';
+  case 8: monthName = 'August';
+  case 9: monthName = 'September';
+  case 10: monthName = 'October';
+  case 11: monthName = 'November';
+  case 12: monthName = 'December';
+  default: monthName = 'Invalid month';
+}
+console.log(monthName); // 'Invalid month'
+```
+
+> *왜 Invalid month가 나왔지?*
+
+switch 문의 표현식의 평과 결과로 일치한 11인 case문을 실행은 하였으나, switch 문을 탈출 하지 않고 switch 문이 끝날 때까지 이후의 모든 case문과 default 문을 실행했기 때문이다.
+이를 **폴스루(fall through)** 라 한다.
+
+> 'November' 할당 -> 'December' 재할당 -> 'Invalid month' 재할당
+
+**그러므로 이런 경우엔 case 문에 break문으로 탈출시켜주자**
+
+```javascript
+var month = 11;
+var monthName;
+
+switch (month) {
+  case 1: monthName = 'January';
+    break;
+  case 2: monthName = 'February';
+    break;
+  case 3: monthName = 'March';
+    break;
+  case 4: monthName = 'April';
+    break;
+  case 5: monthName = 'May';
+    break;
+  case 6: monthName = 'June';
+    break;
+  case 7: monthName = 'July';
+    break;
+  case 8: monthName = 'August';
+    break;
+  case 9: monthName = 'September';
+    break;
+  case 10: monthName = 'October';
+    break;
+  case 11: monthName = 'November';
+    break;
+  case 12: monthName = 'December';
+    break;
+  default: monthName = 'Invalid month';
+}
+
+console.log(monthName); // November
+```
+
+default 문에는 break 문을 생략하는것이 일반적이다.
+
+> default 문은 switch 문의 가장 마지막에 위치 하므로
+> default 문의 실행이 종료하면 switch 문을 빠져나간다.
 
 
 
+**상황에 때라 가독성이 좋은쪽으로 switch, if...else를 사용하도록 하자.**
 
 
 
+## 반복문
+
+- 주어진 조건식의 평가 결과가 참인 경우 코드 블록을 실행한다.
+- 조건식을 다시 검사하여 여전히 참인경우 코드 블록을  다시 실행한다(조건식이 거짓일때까지 반복)
+- for, while, do...while
+
+
+
+### for
+
+- 조건식이 거짓으로 판변될 때까지 코드 블록을 반복 실행한다.
+- 변수 선언문의 변수 이름은 반복을 의미하는 iteration의 i를 사용하는것이 일반적
+
+```javascript
+for (변수 선언문 또는 할당문; 조건식; 증감식) {
+  조건식이 참인 경우 반복 실행될 문;
+}
+```
+
+
+
+### while
+
+- 주어진 조건시그이 평가 결과가 참이면 코드 블록을 계속해서 반복 실행한다.
+- 조건문의 평가 결과가 거짓이 되면 실행을 종료한다.
+- 조건식의 평가 결과가 불리언 값이 아니면 불리언 값으로 강제 변환되어 논리적 참, 거짓을 구별한다.
+
+
+
+### do...while 
+
+- 코드 블록을 먼저 실행하고 조건식을 평가한다.
+  따라서 코드 블록은 무조건 한번 이상 실행된다.
+
+
+
+## break 문
+
+- 레이블 문, 반복문, switch 문의 코드 블록을 탈출 한다.
+
+  > 레이블 문 : 식별자가 붙은 문
+  > 프로그램의 실행 순서를 제어하기 위해 사용한다
+  > ex) switch문의 case문과 default문
+  >
+  > for문 외부로 탈출할 때 유용하지만, 그 외의경우엔 사용을 권장하지않는다 > 가독성이 나빠짐 = 오류 발생률 높음
+
+
+
+## continue 문
+
+- 반복문의 코드 블록 실행을 현 지점에서 중단하고 반복문의 증감식으로 이동한다.
+- break 문처럼 반복문을 탈출하지는 않는다.
