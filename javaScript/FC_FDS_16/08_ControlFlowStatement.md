@@ -127,3 +127,93 @@ console.log(kind); // 양수
 
 ```
 
+
+
+코드 블록 내에 문이 하나뿐이라면 중괄호 생략가능
+
+```javascript
+var num = 2;
+var kind;
+
+if (num > 0) 			kind = '양수';
+else if (num < 0) kind = '음수';
+else 							kind = '영';
+
+console.log(kind); // 양수
+```
+
+
+
+대부분의 if...else 문은 삼항조건 연산자로 바꿔 쓸 수 있다.
+
+```javascript
+var x = 2;
+var result;
+
+if (x % 2) { // 2 % 2 = 0 이고 0은 false로 암묵적 강제 변환된다.
+  result = '홀수';
+} else {
+  result = '짝수';
+}
+
+console.log(result); // 짝수
+
+// 위의 예제를 아래와 같이 삼항 조건 연산자로 바꿔 쓸 수 있다.
+// 두가지 경우의 수
+var x = 2;
+
+var result = x % 2 ? '홀수' : '짝수';
+console.log(result); // 짝수
+```
+
+```javascript
+// 세가지 경우의 수
+// 양수, 음수, 영
+
+var num = 2;
+var kind = num ? (num > 0 ? '양수' : '음수') : '영';
+
+console.log(kind); // 양수
+```
+
+
+
+**삼항 조건 연산자** `num > 0 ? '양수' : '음수'` 는 표현식이다.
+= 값처럼 사용 할 수 있다.
+= 변수에 할당할 수 있다.
+
+**if ... else 문**은 값처럼 사용할 수 없기때문에 변수에 할당할 수 없다.
+
+단순히 값을 결정하여 변수에 할당하는 경우 : **삼항 조건 연산자**
+실행하여야 할 내용이 복잡한 여러줄의 문이 필요할 경우 : **if ... else**
+
+
+
+### switch 문
+
+- 주어진 표현식을 평가하여 그 값과 일치하는 표현식을 갖는 case 문으로 실행순서를 이동시킨다.
+- case 문은 상황(case)을 의미하는 표현식을 지정하고 콜론으로 마친다. 그 뒤에 실행할 문들을 위치시킨다.
+- switch 문의 표현식과 일치하는 표현식을 갖는 case 문이 없다면 실행순서는 default 문으로 이동한다.(옵션사항)
+
+```javascript
+switch (표현식) {
+  case 표현식1 : 
+    switch 문의 표현식과 표현식1이 일치하면 실행될 문;
+  break;
+  case 표현식2 : 
+    switch 문의 표현식과 표현식2이 일치하면 실행될 문;
+  break;
+  default:
+  	switch  문의 표현식과 일치하는 표현식을 갖는 case 문이 없을 때 실행될 문;    	
+}
+
+```
+
+
+
+
+
+
+
+
+
