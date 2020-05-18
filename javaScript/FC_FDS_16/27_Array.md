@@ -1166,3 +1166,64 @@ console.log(points); // [1, 10, 100, 2, 25, 40, 5]
 sort 메소드의 기본 정렬 순서는 문자열 Unicode 코드 포인트 순서에 따른다. 배열의 요소가 숫자 타입이라 할지라도 배열의 요소를 일시적으로 문자열로 변환한 후, 정렬한다.
 
 따라서 숫자 요소를 정렬하기 위해서는 sort 메소드에 **정렬 순서를 정의하는 비교 함수를 인수로 전달**한다. 비교 함수를 생략하면 배열의 각 요소는 일시적으로 문자열로 변환되어 Unicode 코드 포인트 순서에 따라 정렬된다.
+
+
+
+### Array.prototype.forEach
+
+forEach 메소드는 for 문을 대체할 수 있는 메소드이다.
+배열을 순회하며 배열의 각 요소에 대하여 인수로 전달된 콜백 함수를 호출한다.
+
+```javascript
+const number = [1, 2, 3];
+let pows = [];
+
+for (let i = 0; i < number.length; i++) {
+  pows.push(number[i] ** 2);
+}
+console.log(pows); // [1, 4, 9]
+
+pows = [];
+
+number.forEach(items => pows.push(items ** 2);
+console.log(pows); // [1, 4, 9]
+```
+
+forEach 메소드의 콜백 함수는 요소값, 인덱스, forEach 메소드를 호출한 배열, 즉 this를 전달 받을 수 있다.
+
+```javascript
+// forEach 메소드는 콜백 함수를 호출하면서 3개(요소값, 인덱스, this)의 인수를 전달한다.
+[1, 2, 3].forEach((item, index, arr) => {
+  console.log(`요소값: ${item}, 인덱스: ${index}, this: ${arr}`);
+});
+/*
+요소값: 1, 인덱스: 0, this: 1,2,3
+요소값: 2, 인덱스: 1, this: 1,2,3
+요소값: 3, 인덱스: 2, this: 1,2,3
+*/
+```
+
+forEach 메소드는 원본 배열을 변경하지 않는다.
+하지만 콜백 함수를 통해 원본 배열을 변경할 수 있다.
+
+```javascript
+const numbers = [1, 2, 3];
+
+number.forEach((item, index, arr) => {
+  arr[index] = item ** 2;
+});
+console.log(numbers); // [1, 4, 9]
+```
+
+
+
+forEach 메소드의 반환값은 언제나 undefined이다.
+
+```javascript
+const result = [1, 2, 3].forEach(console.log);
+console.log(result); // undefined
+```
+
+
+
+forEach 메소드에 두번째 인수로 forEach 메소드 내부에서 this로 사용될 객체를 전달할 수 있다.
