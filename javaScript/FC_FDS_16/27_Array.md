@@ -1227,3 +1227,287 @@ console.log(result); // undefined
 
 
 forEach 메소드에 두번째 인수로 forEach 메소드 내부에서 this로 사용될 객체를 전달할 수 있다.
+
+```javascript
+class Numbers {
+    numberArray = [];
+	
+	multiply(arr) {
+        arr.forEach(function (item) {
+          // 일반 함수로 호출되는 콜백 함수 내부의 this는 undefined를 가리킨다.
+	      // TypeError: Cannot read property 'numberArray' of undefined
+          this.numberArray.push(item * item);  
+        });
+    }
+}
+
+const numbers = new Numbers();
+numbers.multiply([1, 2, 3]);
+console.log(numbers.numberArray);
+```
+
+forEach 메소드의 콜백 함수는 일반 함수로 호출되므로 콜백 함수 내부의 this는 undefined를 가리킨다. 클래스 내부의 코드는 암묵적으로 strict mode가 적용되기 때문이다. 콜백 함수 내부의 this와 multiply 메소드 내부의 this를 일치시키려면 forEach 메소드에 두번째 인수로 forEach 메소드 내부에서 this로 사용될 객체를 전달한다.
+
+```javascript
+class Numbers {
+    numberArray = [];
+	
+	multiply(arr) {
+        arr.forEach(function (item) {
+            this.numberArray.
+        }, this);
+    }
+}
+const numbers = new Numbers();
+numbers.multiply([1, 2, 3]);
+console.log(numbers.numberArray); // [1, 4, 9]
+```
+
+위를 ES6의 화살표함수 사용해서 만들기
+
+```javascript
+class Number {
+    numerArray = [];
+
+	multiply(arr) {
+        arr.forEach(item => this.numberArray.push(item * item));
+    }
+}
+
+const numbers = new Numbers();
+numbers.multiply([1, 2, 3]);
+console.log(numbers.numberArray); // [1, 4, 9]
+```
+
+forEach 메소드는 for 문과는 달리 break, continue 문을 사용할 수 없다. 다시 말해, 배열의 모든 요소를 빠짐없이 모두 순회하며 중간에 순회를 중단할 수 없다.
+
+희소 배열의 존재하지 않는 요소는 순회 대상에서 제외된다. 이는 앞으로 살펴볼 배열을 순회하는 map, filter, reduce 메소드 등에서도 마찬가지이다.
+
+
+
+### Array.prototype.map
+
+map 메소드는 배열을 순회하며 배열의 각 요소에 대하여 인수로 전달된 콜백 함수를 실행한다.
+그리고 콜백함수는 반환값들로 구성된 새로운 배열을 반환한다.
+이때 원본 배열은 변경되지않는다.
+
+```javascript
+const numbers = [1, 4, 9];
+
+// 배열을 순회하며 배열의 각 요소에 대하여 인수로 전달된 콜백 함수를 실행한다.
+// 그리고 콜백 함수의 반환값들로 구성된 새로운 배열을 반환한다.
+const roots = numbers.map(item => Math.sqrt(item));
+
+// 위 코드는 아래와 같다.
+// const roots = numbers.map(Math.sqrt);
+
+// map 메소드는 새로운 배열을 반환한다
+console.log(roots);   // [ 1, 2, 3 ]
+// map 메소드는 원본 배열은 변경하지 않는다
+console.log(numbers); // [ 1, 4, 9 ]
+
+```
+
+**map 메소드가 생성하여 반환하는 새로운 배열의 length는 map 메소드를 호출한 배열, 즉 this의 length와 반드시 일치한다. 즉, 1:1 매핑(mapping)한다.**
+
+forEach 메소드와 마찬가지로 map 메소드에 두번째 인자로 map 메소드 내부에서 this로 사용될 객체를 전달할 수 있다.
+
+
+
+## Array.prototype.filter
+
+filter 메소드는 배열을 순회하며 배열의 각 요소에 대하여 인수로 전달된 콜백 함수를 실행한다.
+그리고 콜백 함수의 반환값이 true인 요소만을 추출한 새로운 배열을 반환한다.
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+
+// 홀수만을 필터링 한다.
+const odds = numbers.filter(item => item % 2);
+console.log(odds); // [1, 3, 5]
+```
+
+**filter 메소드가 생성하여 반환하는 새로운 배열의 length는 filter 메소드를 호출한 배열, 즉 this의 length와 같거나 작다.**
+
+forEach, map 메소드와 마찬가지로 filter 메소드의 콜백 함수는 요소값, 인덱스, filter 메소드를 호출한 배열, 즉 this를 전달 받을 수 있다.
+
+```javascript
+[1, 2, 3].filter((item, index, arr) => {
+   console.log(`요소값: ${item}, 인덱스: ${index}, this: ${arr}`);
+   return item % 2;
+});
+/*
+요소값: 1, 인덱스: 0, this: 1,2,3
+요소값: 2, 인덱스: 1, this: 1,2,3
+요소값: 3, 인덱스: 2, this: 1,2,3
+*/
+```
+
+filter 메소드는 배열의 특정 요소를 추출하기 위해 사용할 수 있지만 배열의 특정 요소를 제거하기 위해 사용할 수도 있다.
+
+```javascript
+class Users {
+    constructor() {
+        this.users = [
+          { id: 1, name: 'Lee' },
+          { id: 2, name: 'Kim' }
+        ];
+    }
+    
+    // 요소 추출
+    findById(id) {
+        return this.users.filter(user => user.id === id);
+    }
+    
+    // 요소 제거
+    remove(id) {
+        this.users = this.users.filter(user => user.id !== id);
+    }
+}
+
+const users = new Users();
+
+let user = users.findById(1);
+console.log(user); // [{ id: 1, name: 'Lee' }]
+
+users.remove(1);
+
+user = users.findById(1);
+console.log(user); // []
+```
+
+
+
+## Array.prototype.reduce
+
+reduce메소드는 배열을 순회하며 콜백 함수의 이전 반환값과 배열의 각 요소에 대하여 인수로 전달된 콜백 함수를 실행하여 하나의 결과값을 반환한다.
+
+```javascript
+// 1부터 4까지 누적을 구한다.
+const sum = [1, 2, 3, 4].reduce((accumulator, currentValue, index, array) => accumulator + currentValue, 0);
+
+console.log(sum); // 10
+```
+
+|    구분     | 콜백 함수에 전달된 인수 |              |       |              | 콜백 함수의 반환값              |
+| :---------: | :---------------------: | :----------: | :---: | ------------ | ------------------------------- |
+|             |       accumulator       | currentValue | index | array        |                                 |
+| 첫번째 순회 |       0 (초기값)        |      1       |   0   | [1, 2, 3, 4] | 1 (accumulator + currentValue)  |
+| 두번째 순회 |            1            |      2       |   1   | [1, 2, 3, 4] | 3 (accumulator + currentValue)  |
+| 세번째 순회 |            3            |      3       |   2   | [1, 2, 3, 4] | 6 (accumulator + currentValue)  |
+| 네번째 순회 |            6            |      4       |   3   | [1, 2, 3, 4] | 10 (accumulator + currentValue) |
+
+
+
+### Array.prototype.some
+
+some 메소드는 배열을 순회하며 각 요소에 대하여 인수로 전달된 콜백 함수를 호출한다. 이때 some 메소드는 콜백 함수의 반환값이 한번이라도 참이면 true, 모두 거짓이면 false를 반환한다. 즉, 배열의 요소 중에 콜백 함수 통해 정의한 조건을 만족하는 요소가 1개 이상 존재하는지 확인하여 그 결과를 불리언 타입으로 반환한다.
+
+forEach, map, filter 메소드와 마찬가지로 some 메소드의 콜백 함수는 요소값, 인덱스, 메소드를 호출한 배열, 즉 this를 전달 받을 수 있다.
+
+```javascript
+// 배열의 요소 중에 10보다 큰 요소가 1개 이상 존재하는지 확인
+[5, 10, 15].some(item => item > 10); // true
+
+// 배열의 요소 중에 0보다 작은 요소가 1개 이상 존재하는지 확인
+[5, 10, 15].some(item => item < 0); // false
+
+// 배열의 요소 중에 'banana'가 1개 이상 존재하는지 확인
+['apple', 'banana', 'orange'].some(item => item === 'banana'); // true
+```
+
+
+
+### Array.prototype.every
+
+every 메소드는 배열을 순회하며 각 요소에 대하여 인수로 전달된 콜백 함수를 호출한다. 이때 every 메소드는 콜백 함수의 반환값이 모두 참이면 true, 한번이라도 거짓이면 false를 반환한다. 즉, 배열의 모든 요소가 콜백 함수를 통해 정의한 조건을 모두 만족하는지 확인하여 그 결과를 불리언 타입으로 반환한다.
+
+forEach, map, filter 메소드와 마찬가지로 every 메소드의 콜백 함수는 요소값, 인덱스, 메소드를 호출한 배열, 즉 this를 전달 받을 수 있다.
+
+```javascript
+// 배열의 모든 요소가 3보다 큰지 확인
+[5, 10, 15].every(item => item > 3); // true
+
+// 배열의 모든 요소가 10보다 큰지 확인
+[5, 10, 15].every(item => item > 10); // false
+```
+
+
+
+### Array.prototype.find
+
+ES6에서 새롭게 도입된 find메소드는 배열을 순회하며 각 요소에 대하여 인수로 전달된 콜백 함수를 호출하여 반환값이 true인 첫번째 요소를 반환한다. 콜백 함수의 호출 결과가 true인 요소가 존재하지 않으면 undefined를 반환한다.
+
+```javascript
+const users = [
+    { id: 1, name: 'Lee' },
+    { id: 2, name: 'Kim' },
+    { id: 3, name: 'Choi' },
+    { id: 4, name: 'Park' }
+];
+
+// id가 2인 요소를 반환한다.
+const result = users.find(item => item.id === 2);
+
+// Array#find는 배열이 아니라 요소를 반환한다.
+console.log(result); // {id: 2, name: 'Kim'}
+```
+
+**filter 메소드**는 콜백 함수의 호출 결과가 true인 요소만을 추출한 새로운 배열을 반환한다. 따라서 filter 메소드의 **반환값은 언제나 배열**이다.
+
+**find 메소드는** 콜백 함수의 호출 결과가 true인 첫번째 요소를 반환하므로 find의 결과값은 해당 요소값이다.
+
+```javascript
+// Array#filter는 배열을 반환한다.
+[1, 2, 2, 3].filter(item => item === 2); // [2, 2]
+
+// Array#find는 요소를 반환한다.
+[1, 2, 2, 3].find(item => item === 2); // 2
+```
+
+
+
+### Array.prototype.findIndex
+
+ES6에서 새롭게 도입된 findIndex 메소드는 배열을 순회하며 각 요소에 대하여 인수로 전달된 콜백 함수를 호출하여 반환값이 true인 첫번째 요소의 인덱스를 반환한다.
+
+콜백 함수의 호출결과가 true인 요소가 존재하지 않으면 -1를 반환한다.
+
+forEach, map, filter 메소드와 마찬가지로 findIndex 메소드의 콜백 함수는 요소값, 인덱스, 메소드를 호출한 배열, 즉 this를 전달 받을 수 있다.
+
+```javascript
+const users = [
+  { id: 1, name: 'Lee' },
+  { id: 2, name: 'Kim' },
+  { id: 2, name: 'Choi' },
+  { id: 3, name: 'Park' }
+];
+
+// id가 2인 요소의 인덱스를 구한다.
+users.findIndex(item => item.id === 2); // 1
+
+// name이 'Park'인 요소의 인덱스를 구한다.
+users.findIndex(item -> item.name === 'Park'); // 3
+```
+
+
+
+### Array.prototype.flatMap
+
+ES10(ECMAScript 2019)에서 새롭게 도입된 flatMap 메소드는 map을 통해 생성된 새로운 배열을 평탄화한다. 즉, map 메소드와 flat 메소드를 순차적으로 실행하는 효과가 있다.
+
+```javascript
+let arr = ['hello', 'world'];
+
+// map과 flat을 순차적으로 실행
+console.log(arr.map(str => str.split('')).flat());
+// ['h', 'e', 'l', 'l', 'o', 'w', 'o', 'r', 'l', 'd']
+
+// flatMap은 map을 통해 생성된 새로운 배열을 평탄화한다.
+console.log(arr.flatMap(str => str.split('')));
+// ['h', 'e', 'l', 'l', 'o', 'w', 'o', 'r', 'l', 'd']
+```
+
+단, flat메소드처럼 인수를 전달하여 평탄화 깊이를 지정할 수는 없고 1단계만 평탄화 한다.
+
+map을 통해 생성된 중첩 배열의 평탄화 깊이를 지정해야 하는 경우, flatMap 메소드를 사용하지 말고 map과 flat을 각각 호출한다.
