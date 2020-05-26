@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* CSS에서 처리할수있는건 CSS에서 처리해주는것이 좋다. */
+    /*
+    input[type="checkbox"]:checked + span{
+      text-decoration: line-through;
+    }
+    */
+    .completed {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" placeholder="enter todo!" class="input-todo">
+  <ul class="todos"></ul>
+  <script>
+    const $inputTodo = document.querySelector('.input-todo');
+    const $todos = document.querySelector('.todos');
+    
+    $inputTodo.onkeyup = ({ keyCode }) => {
+      // key가 enter키가 눌러졌는지 판단
+      if (keyCode !== 13 || $inputTodo.value.trim() === '') return;
+      // 사용자가 입력한 텍스트정보는 요소 노드가 가지고 있다.
+      // $todos.innerHTML : 참조 / 할당도 할 수 있다. / 요소노드에 텍스트노드가있는 객체를 만들어서 todos 안에 끼어넣는다.
+      $todos.innerHTML += `<li>
+        <input type="checkbox">
+        <span>${$inputTodo.value}</span>
+        <button>X</button>
+        </li>`; // += : 축약 표현 / 기존거 살리면서 붙임. innerHtml 약점 : 위치조절이안된다.
+      $inputTodo.value = ''; // space 3번 눌렀을때 문제!? => trim을 해줘야되, 넣을때만빼기때문에 trim해서 빈문자열이면 아무것도 안해야함
+    };
+
+    // button이 클릭되면 삭제
+    // 어떻게 가져와? document.querySelector : 없을때가져오기때문에 null => 이벤트를 못단다.
+    // => todos는 있다.(html상에있어, 얘한테 이벤트위임을 사용해서 이벤트를 달아준다.)
+    // button에서 이벤트를 발생하면 li, ul로 올라간다 // 최상위 body, html에 달면, filter해야할것(걷어내야할것)이 많다.
+    /*
+    $todos.onclick = (e) => {
+      // matches : 인수로 준 문자열 : css의 select문법으로 가져올 수 있니?
+      if (!e.target.matches('.todos > li > button')) return;
+      e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+    };
+    */
+    $todos.onclick = ({ target }) => { // target 프로퍼티만 보게 (e)에서 => ({ target })으로 수정
+      // matches() : 인수로 준 문자열을 css의 select문법으로 가져올 수 있니?
+      if (!target.matches('.todos > li > button')) return;
+      target.parentNode.parentNode.removeChild(target.parentNode);
+    };
+    // $todos는 이벤트를 발생하는 요소라고 볼 수 없다.(이벤트 위임)
+    // 자식중에 button이 클릭되었을때만 동작해야한다.
+    // 이벤트를 발생시킨 요소 노드 : e.target // 클릭이벤트를 실제로 발생시킨 요소를 참조한다.
+
+    $todos.onchange = (e) => {
+      // className 프로퍼티는 문자열을 반환하므로 공백으로 구분된 여러 개의 클래스를 반환하는 경우, 다루기가 불편하다.
+      // e.target.nextElementSibling.classList.add('completed'); 이렇게 쓰면 떼질 못한다.
+      // style로 직접넣지 않도록 한다.
+      // class명으로 컨트롤 한다.
+      // CSS로만 가능하면 그 방법으로 한다.
+      e.target.nextElementSibling.classList.toggle('completed');
+    };
+    // change는 값변경 이벤트이다.
+    // 상태유지를 DOM요소들이 한다. : check 되어있다, 안되어있다... => 개별적인 돔들이 기억하고 있다. (리로드하는순간 없어진다.)
+    // 프론트엔드는 서버에 저장해야한다. => DOM요소에있는 값들을 가져와서 보내줘야한다.
+    // 재가동이되면 해야할게 서버에가서 할일을가지고와서 초기표시를해야한다.
+    // 서버에서는 어떻게 데이터를 주지? => 객체, 배열
+    // 서버에 전송한다 = 데이터베이스에 등록한다 (영구적 보존)
+  </script>
+</body>
+</html>
