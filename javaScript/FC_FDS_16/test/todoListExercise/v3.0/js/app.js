@@ -189,6 +189,3 @@ $nav.onclick = (e) => {
 
   activeChk();
 }
-
-
- 
