@@ -3,13 +3,8 @@ export const ajax = (() => {
     const xhr = new XMLHttpRequest();
     xhr.open(method, url);
     xhr.setRequestHeader('content-type', 'application/json');
-    if (payload) {
-      xhr.send(JSON.stringify(payload));
-      console.log(payload);
-    } else {
-      // console.log(xhr.send(JSON.stringify(callback)));
-      xhr.send();
-    }
+    xhr.send(JSON.stringify(payload));
+
     
 
     xhr.onload = () => {
