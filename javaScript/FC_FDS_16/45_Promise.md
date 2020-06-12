@@ -139,3 +139,45 @@ setTimeout 함수의 콜백 함수의 호출자(caller)가 setTimeout 함수라�
 - Promise 생성자 함수를 new 연산자와 함께 호출하면 프로미스(Promise 객체)를 생성한다.
 - Promise 생성자 함수는 비동기 처리를 수행할 콜백 함수를 인자로 전달 받는데 이 콜백 함수는 resolve와 reject 함수를 인수로 전달 받는다.
 
+
+
+## fetch
+
+fetch 함수는 XMLHttpRequest 객체와 마찬가지로 HTTP 요청 전송 기능을 제고앟는 클라이언트 사이드 Web API이다.
+
+fetch 함수에는 HTTP 요청을 전송할 URL과
+HTTP 요청 메소드, HTTP 요청 헤더, 페이로드 등을 설정한 객체를 전달한다.
+
+```javascript
+const promise = fetch(url, [, options])
+```
+
+
+
+fetch 함수는 HTTP 응답을 나타내는 Response 객체를 래핑한 Promise 객체를 반환한다. 
+
+= 후속처리 메서드 then을 통해 프로미스가 resolve한 Response 객체를 전달 받을 수 있다.
+
+Response 객체는 HTTP 응답을 나타내는 다양한 프로퍼티를 제공한다.
+
+
+
+Response.prototype 에는 Response 객체에 포함되어 있는 HTTP응답몸체를 위한 다양한 메서드를 제공한다.
+
+ex) fetch 함수가 반환한 프로미스가 래핑하고 있는 HTTP응답 몸체를 취득하려면 
+Response.prototype.json 메서드를 사용한다.
+
+```javascript
+fetch('https://jsonplaceholder.typicode.com/todos/1')
+// response는 http 응답을 나타내는 response객체이다.
+// json메서드를 사용하여 reponse객체에서 http 응답 몸체를 취득하여 역직렬화한다.
+	.then(response => response.json());
+	.then(json => console.log(json));
+```
+
+
+
+fetch 함수를 통해 HTTP 요청 전송
+
+fetch 함수에 첫번째 인수 : HTTP 요청을 전송할 URL
+두번째 인수 : HTTP 요청 메서드, HTTP 요청 헤더, 페이로드 등을 설정한 객체
