@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" rel="stylesheet">
+  <title>Tabs</title>
+  <style>
+    *, *:before, *:after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background-image: linear-gradient(20deg, #08aeea 0%, #2af598 100%);
+      font-family: 'Open Sans', Sans-serif;
+    }
+
+    .tabs {
+      min-width: 320px;
+      max-width: 800px;
+      padding: 50px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 4px;
+    }
+
+    .tab {
+      display: inline-block;
+      margin: 0 0 -1px;
+      padding: 15px 25px;
+      text-align: center;
+      color: #555;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .icon {
+      margin-right: 10px;
+    }
+
+    .tab.active {
+      border: 1px solid #ddd;
+      border-top: 2px solid #f44336;
+      border-bottom: 1px solid #fff;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 20px;
+      border: 1px solid #ddd;
+      line-height: 1.6rem;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="tabs">
+    <ul class="tab-group"></ul>
+    <div class="tab-content-group"></div>
+    <!--
+    <ul class="tab-group">
+      <li id="1" class="tab active">
+        <i class="icon fab fa-html5"></i>HTML
+      </li>
+      <li id="2" class="tab">
+        <i class="icon fab fa-css3"></i>CSS
+      </li>
+      <li id="3" class="tab">
+        <i class="icon fab fa-js-square"></i>JavaScript
+      </li>
+    </ul>
+    <div class="tab-content-group">
+      <div class="tab-content">
+        <strong>HTML(HyperText Markup Language)</strong> is the most basic building block of the Web.
+        It describes and defines the content of a webpage along with the basic layout of the webpage.
+        Other technologies besides HTML are generally used to describe a web page's
+        appearance/presentation(CSS) or functionality/ behavior(JavaScript).
+      </div>
+    </div>
+    -->
+  </div>
+  <script>
+  const $tabGroup = document.querySelector('.tab-group');
+  const $tabContentGroup = document.querySelector('.tab-content-group');
+  class Tab {
+    constructor(tabsData) {
+      this.tabsData = tabsData;
+      this.tabState = 1; // tab id
+      // do someting
+    }
+
+    render() {
+      let tabGroupHtml = '';
+      let tabContentGroup = '';
+      // console.log(this.tabsData);
+
+      this.tabsData.forEach(element => {
+        tabGroupHtml += `
+        <li id="${element.id}" class="tab">
+          <i class="icon ${element.iconClass}"></i>${element.title}
+        </li>
+        `
+
+        tabContentGroup += `
+        <div class="tab-content">
+          ${element.content};
+        </div>
+        `
+      });
+      $tabGroup.innerHTML = tabGroupHtml;
+      $tabContentGroup.innerHTML = tabContentGroup;   
+
+      $tabGroup.querySelector('li').classList.add('active');
+      $tabContentGroup.querySelector('.tab-content').classList.add('active');
+    }
+
+    tabClick(tab) {
+      $tabGroup.querySelectorAll('li').forEach((tabMenu, index) => {
+        tabMenu.classList.remove('active');
+        // $tabContentGroup.querySelectorAll('.tab-content')[index].classList.add('active')
+        // $tabContentGroup[index].classList.add('active');
+      });
+      tab.target.classList.add('active');
+    }
+
+    tabContentDisplay(tab) {
+      $tabContentGroup.querySelectorAll('.tab-content').forEach(tabContent => {
+        tabContent.classList.remove('active');
+        $tabContentGroup.querySelectorAll('.tab-content')[tab.target.id -1].classList.add('active');
+      });
+    }
+    // do someting
+  }
+
+  window.onload = function () {
+    const tab = new Tab([
+      {
+        id: 1,
+        title: 'HTML',
+        iconClass: 'fab fa-html5',
+        content: `<strong>HTML(HyperText Markup Language)</strong> is the most basic building block of the Web.
+          It describes and defines the content of a webpage along with the basic layout of the webpage.
+          Other technologies besides HTML are generally used to describe a web page's
+          appearance/presentation(CSS) or functionality/ behavior(JavaScript).`
+      },
+      {
+        id: 2,
+        title: 'CSS',
+        iconClass: 'fab fa-css3',
+        content: `<strong>Cascading Style Sheets(CSS)</strong> is a stylesheet language used to describe
+          the presentation of a document written in HTML or XML (including XML dialects
+          such as SVG, MathML or XHTML). CSS describes how elements should be rendered on screen,
+          on paper, in speech, or on other media.`
+      },
+      {
+        id: 3,
+        title: 'JavaScript',
+        iconClass: 'fab fa-js-square',
+        content: `<strong>JavaScript(JS)</strong> is a lightweight interpreted or JIT-compiled programming
+          language with first-class functions. While it is most well-known as the scripting
+          language for Web pages, many non-browser environments also use it, such as Node.js,
+          Apache CouchDB and Adobe Acrobat. JavaScript is a prototype-based, multi-paradigm,
+          dynamic language, supporting object-oriented, imperative, and declarative
+          (e.g. functional programming) styles.`
+      }
+    ]);
+    tab.render();
+
+    $tabGroup.onclick = e => {
+      if (!e.target.matches('li')) return;
+      e.target.classList.toggle('active')
+      tab.tabClick(e);
+      tab.tabContentDisplay(e);
+    };
+  };
+
+  
+  </script>
+</body>
+</html>
