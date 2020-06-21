@@ -1,4 +1,3 @@
-import { ajax } from './ajax.js';
 // State
 let todos = [];
 let navState = 'all';
@@ -29,6 +28,39 @@ const render = () => {
   $completedTodos.textContent = todos.filter(({ completed }) => completed).length;
   $activeTodos.textContent = todos.filter(({ completed }) => !completed).length;
 };
+
+const ajax = (() => {
+  const req = (method, url, callback, payload) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open(method, url);
+    xhr.setRequestHeader('content-Type', 'applicatin/json');
+    xhr.send(JSON.stringify(payload));
+  
+    // 성공적으로 응답이 왔을 때
+    xhr.onload = () => {
+      if (xhr.status === 200 || xhr.status === 201) {
+        callback(JSON.parse(xhr.response));
+      } else {
+        console.error(xhr.status);
+      }
+    };
+  };
+
+  return {
+    get(url, callback) {
+      req('GET', url, callback);
+    },
+    post(url, payload, callback) {
+      req('POST', url, callback, payload);
+    },
+    patch(url, payload, callback) {
+      req('PATCH', url, callback, payload);
+    },
+    delete(url, callback) {
+      req('DELETE', url, callback);
+    }
+  }
+})();
 
 // ajax.get => todos
 const getTodos = () => {
