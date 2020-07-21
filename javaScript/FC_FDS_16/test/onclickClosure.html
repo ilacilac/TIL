@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input class="ck" type="checkbox" checked>
+  <button id="1" class="btn">0</button>
+  <script>
+    const $btn = document.querySelector('.btn');
+    $btn.onclick = (function () {
+      let cnt = 0;
+      return e => { e.target.textContent = ++cnt; };
+    }());
+    /*
+      1. 즉시실행함수
+      2. return해서 function을 만들어준다.
+      3. (e)가 없어야한다. => 이벤트객체는 어디서 받아야 하나?
+    */
+  </script>
+</body>
+</html>

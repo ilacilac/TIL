@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" placeholder="enter todo!" id="textInput">
+  <ul class="todos"></ul>
+  <script>
+    const $todos = document.querySelector('.todos');
+    const $textInput = document.getElementById('textInput');
+    const $chkBox = document.querySelectorAll('input[type="checkbox"]');
+    // 체크 삭제버튼, 체크시 밑줄
+    /*
+      체크 -> checked , : togg checked  ===  checked le
+      콘텐츠
+      삭제버튼 : button
+    */
+    $textInput.onkeyup = e => {
+      if (e.keyCode !== 13) return;
+      const textContent = e.target.value;
+      $todos.innerHTML += `
+      <li>
+        <input type="checkbox">${textContent}<button class="deleteBtn">X</button>
+      </li>
+      `;
+      e.target.value = '';
+    };
+
+    // checkbox
+    $todos.addEventListener('change', function (event) {
+      console.dir(event.target);
+      event.target.parentElement.classList.toggle('active');
+    });
+
+    /*
+    $textInput.onkeyup = function (e) {
+      if (e.keyCode !== 13) return;
+      const textContent = e.target.value;
+      $todos.innerHTML += `<li>${textContent}</li>`;
+      e.target.value = '';
+    };
+    */
+  </script>
+</body>
+</html>

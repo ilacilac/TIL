@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    input[type="checkbox"]:checked + span {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+  <ul class="todos"></ul>
+
+  <section class="addTodoTab">
+    <form action="javascript:void(0)" id="addTodo">
+        <label for="title">
+            <span>할 일: </span>
+            <input type="text" name="addTitle" id="addTitle">
+        </label>
+        <label for="addContent">
+            <span>세부 내용: </span>
+            <input type="text" name="addContent" id="addContent">
+        </label>
+        <button type="button" id="addTodoBtn">추가하기!</button>
+    </form>
+  </section>
+
+  <script>
+  // ul에 li 뿌리기
+  function todosParsing () {
+    // localStorage.setItem
+  }
+
+  // 추가버튼 눌렀을 때
+  const $addTodoBtn = document.getElementById('addTodoBtn');
+  
+  $addTodoBtn.onclick = function() {
+    const $todos = document.querySelector('.todos');
+    const $addTitle = document.getElementById('addTitle');
+    const $addContent = document.getElementById('addContent');
+    const $localKey = Date.now();
+
+    let todo = {
+      title : $addTitle.value,
+      content : $addContent.value
+    };
+
+    localStorage.setItem($localKey, JSON.stringify(todo));
+  }
+
+    
+
+  </script>
+</body>
+</html>

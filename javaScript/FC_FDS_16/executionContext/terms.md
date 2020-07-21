@@ -46,3 +46,19 @@
 
   - 렉시컬 환경의 "외부 렉시컬 환경에 대한 참조"에 저장할 참조값, 즉 상위 스코프에 대한 참조는 함수 정의가 평가되는 시점에 함수가 정의된 환경(위치)에 의해 결정된다.
 
+```js
+const x = 1;
+
+// ①
+function outer() {
+  const x = 10;
+  const inner = function () { console.log(x); }; // ②
+  return inner;
+}
+
+// outer 함수를 호출하면 중첩 함수 inner를 반환한다.
+// 그리고 outer 함수의 실행 컨텍스트는 실행 컨텍스트 스택에서 pop된다.
+const innerFunc = outer(); // ③
+innerFunc(); // ④ 10
+```
+

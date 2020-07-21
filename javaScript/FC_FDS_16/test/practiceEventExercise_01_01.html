@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" class="inputText" placeholder="write text">
+  <ul class="todos"></ul>
+  <script>
+    const $todos = document.querySelector('.todos');
+    const $inputText = document.querySelector('.inputText');
+
+    // li 요소 추가
+    $inputText.onkeyup = ({ keyCode }) => {
+      if (keyCode !== 13 || $inputText.value.trim() === '') return;
+      $todos.innerHTML += `<li>
+        <input type="checkbox">
+        <span>${$inputText.value}</span>
+        <button>X</button>
+      </li>`;
+      $inputText.value = '';
+    };
+
+    // 밑줄처리
+    $todos.onchange = ({ target }) => {
+      target.nextElementSibling.classList.toggle('active');
+    };
+    
+    // 삭제
+    $todos.onclick = e => {
+      if (!e.target.matches('.todos > li > button')) return;
+      e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+    };
+  </script>
+</body>
+</html>

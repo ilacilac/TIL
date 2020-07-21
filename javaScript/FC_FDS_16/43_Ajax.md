@@ -4,6 +4,12 @@
 - Web API인 XMLHttpRequest객체를 기반으로 동작한다.
 - XMLHttpRequest는 서버와 브라우저 간의 비동기적(Asynchronous) 데이터 통신을 가능케하는 여러 메소드와 프로퍼티/메소드를 제공한다.
 
+**XMLHttpReques** : 
+
+- 생성자 함수 (= 객체생성)
+- 웹 API
+- 클라이언트가 요청
+
 
 
 전통적인 웹 페이지 방식과 비교했을 때의 장점

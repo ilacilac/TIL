@@ -24,8 +24,9 @@ const render = () => {
       <label for="ck-my${id}">${content}</label>
       <i class="remove-todo far fa-times-circle"></i>
     </li>`;
-    $todos.innerHTML = html;
+    // $todos.innerHTML = html; *여기서 쓰면 3번반복하기때문에 밖에다 쓰는게 좋다.
   });
+  $todos.innerHTML = html;
 
   $completedTodos.textContent = todos.filter(todo => todo.completed).length;
   $activeTodos.textContent = todos.filter(todo => !todo.completed).length;

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <button class="btn">0</button>
+  <script>
+    class App {
+      constructor() {
+        this.$button = document.querySelector('.btn');
+        this.count = 0;
+        console.log('constructor this', this);
+        // increase 메소드를 이벤트 핸들러로 등록
+        // 이벤트 핸들러 increase 내부의 this는 DOM 요소(this.$button)를 가리킨다.
+        // this.$button.onclick = this.increase;
+        // -> TypeError: Cannot set property 'textContent' of undefined
+      }
+
+      increase() {
+        console.log('prototype this', this);
+        this.$button.textContent = ++this.count;
+      }
+    }
+
+    new App();
+  </script>
+</body>
+</html>
