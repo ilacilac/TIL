@@ -17,14 +17,29 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": ["react-app", "prettier"]
+    "extends": [
+      "react-app",
+      "prettier"
+    ],
+    "rules": {
+      "semi": [
+        "error",
+        "always"
+      ]
+    }
   },
   "husky": {
     "hooks": {
-      "pre-commit": "echo 'hello'"
+      "pre-commit": "lint-staged"
     }
   },
-
+  "lint-staged": {
+    "**/*.js?(x)": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -40,6 +55,7 @@
   "devDependencies": {
     "eslint-config-prettier": "^6.11.0",
     "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
     "prettier": "^2.0.5"
   }
 }
