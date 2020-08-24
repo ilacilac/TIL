@@ -1,6 +1,6 @@
 # useRef로 특정 DOM 선택하기
 
-리액트에서도 가끔 돔을 직접 선택해야하는 상황이있다
+리액트에서도 가끔 돔을 직접 선택해야하는 상황이있다.
 (엘리먼트 위치 크기, 스크롤, 포커스 설정 등등)
 ref라는것을 사용한다.
 useRef라는 훅 함수
@@ -24,7 +24,6 @@ function InputSample() {
       ...inputs,
       [name]: value,
     });
-
   };
   const onReset = () => {
     setInputs({
