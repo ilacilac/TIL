@@ -271,3 +271,24 @@ serviceWorker.unregister();
 ## 컨테이너 컴포넌트
 
 - 리덕스에있는 상태를 조회하거나 action을 디스패치 할 수 있는 컴포넌트
+
+
+
+## 리덕스 개발자 도구
+
+- 현재 스토어상태를 개발자도구에서 조회할 수 있다.
+- 어떤 액션이 디스패치되었는지, 액션에따라 상태가 어떻게 변했는지 볼 수 있다.
+- 액션의 상태를 되돌릴 수 있고, 바로 dispatch할 수 있다.
+
+```
+Redux Devtools => chrome 웹 스토어 가서 설치
+프로젝트 => yarn add redux-devtools-extension
+
+index.js => store을 만들때,
+
+import {composeWithDevTools} from 'redux-devtools-extension';
+const store = createStore(rootReducer, composeWithDevTools());
+
+페이지 => 개발자도구 / Redux 탭
+```
+
