@@ -292,3 +292,19 @@ const store = createStore(rootReducer, composeWithDevTools());
 페이지 => 개발자도구 / Redux 탭
 ```
 
+
+
+## Connect
+
+- Props를 통해 리덕스의 상태 또는 액션을 디스패치하는 함수를 받아옴
+
+- useSelector / useDispatch가 나온뒤로 잘 사용하지않음
+
+  
+
+## HOC
+
+- 재사용되는 값, 함수를 Props로 받아올 수 있게 해주는 옛날 패턴
+
+
+
