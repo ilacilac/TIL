@@ -186,7 +186,7 @@ export default myLogger;
 
 ```
 
-![미들웨어 2개 연결 시 콘솔](/Users/ming/study/TIL/react/vlpt_reactLecture/images/middleWare03.png)
+![미들웨어 2개 연결 시 콘솔](./images/middleWare03.png)
 
 
 
