@@ -4,8 +4,7 @@
 - 컴포넌트 상태관리 로직들을 분리하여 효율적으로 관리할 수 있다.
 - 미들웨어 / 비동기 작업을 더욱 체계적으로 관리 가능
 - 기본적인 최적화가 이미 되어있다.
-
-
+- 리덕스 자체는 동기적인 동작밖에 못하기때문에 비동기적인 작업을 끼워넣으려면 미들웨어를 사용해야한다.
 
 ## Action 
 
@@ -300,6 +299,8 @@ const store = createStore(rootReducer, composeWithDevTools());
 
 - useSelector / useDispatch가 나온뒤로 잘 사용하지않음
 
+- HOC 
+
   
 
 ## HOC
@@ -308,3 +309,108 @@ const store = createStore(rootReducer, composeWithDevTools());
 
 
 
+## Ducks 구조와 redux-actions
+
+Ducks 구조에는 Reducer 파일안에 액션타입과 액션생성자 함수를 함께 넣어 관리한ㄷ다.
+그리고 이를 "모듈" 이라고 부른다.
+
+### createAction을 통한 액션생성 자동화
+
+파라미터로 전달받은 값을 액션의 payload 값으로 설정해준다.
+
+createAction 함수에서 두번째 파라미터로 받는 부분은 payloadCreator 로서, 
+payload 를 어떻게 정할 지 설정한다. 
+
+만약에 생략하면 기본적으로 `payload => payload` 형태로 되기 때문에, 위 코드를 다음과 같이 작성해도 작동에 있어선 차이가 없지만 차후 헷갈릴 가능성이 있으므로 명시적으로 표시해주도록 하자.
+
+### switch문 대신 handleActions 사용하기
+
+리듀서에서 액션의 type에 따라 다른작업을 하기위해서 switch문을 사용하는데
+scope가 리듀서 함수로 설정되어있어서 서로 다른 case에서 let이나 const를
+통하여 변수를 선언하게 되면 같은이름이 중첩될 시엔 에러가 발생한다.
+그렇다고 각 case마다 함수를 정의하는건 코드를 읽기 힘들어진다.
+이 문제를 handleActions로 해결할 수 있다.
+
+첫번째 파라미터 : 액션에 따라 실행 할 함수들을 가지고 있는 객체
+두번째 파라미터 : 상태의 기본 값(initialState)
+
+### 적용방법
+
+```bash
+yarn add redux-actions
+```
+
+```js
+import { createAction, handleActions } from 'redux-actions';
+
+// 액션 생성자
+// 해당 액션생성자들이, 어떤 파라미터를 받아야하는지, 주석에 메모로 달아둡니다.
+export const create = createAction(CREATE); // color
+export const remove = createAction(REMOVE); 
+export const increment = createAction(INCREMENT); // index
+export const decrement = createAction(DECREMENT); // index
+export const setColor = createAction(SET_COLOR); // { index, color }
+```
+
+```js
+//  handleActions 를 통하여 리듀서의 틀을 만들어준다.
+// 우리의 액션타입에는 접두사가 들어가있기 때문에 그냥 CREATE: 를 하면 안되고, [CREATE]: 로 해주어야합니다.
+export default handleActions({
+    [CREATE]: (state, action) => state,
+    [REMOVE]: (state, action) => state,
+    [INCREMENT]: (state, action) => state,
+    [DECREMENT]: (state, action) => state,
+    [SET_COLOR]: (state, action) => state,
+}, initialState);
+```
+
+```js
+export default handleActions({
+    [CREATE]: (state, action) => {
+        const counters = state.get('counters');
+
+        return state.set('counters', counters.push(
+            Map({
+                color: action.payload,
+                number: 0
+            })
+        ))
+    },
+
+    [REMOVE]: (state, action) => {
+        const counters = state.get('counters');
+
+        return state.set('counters', counters.pop())
+    },
+
+    [INCREMENT]: (state, action) => {
+        const counters = state.get('counters');
+
+        return state.set('counters', counters.update(
+            action.payload, 
+            (counter) => counter.set('number', counter.get('number') + 1))
+        );
+    },
+
+    [DECREMENT]: (state, action) => {
+        const counters = state.get('counters');
+
+        return state.set('counters', counters.update(
+            action.payload, 
+            (counter) => counter.set('number', counter.get('number') - 1))
+        );
+    },
+
+    [SET_COLOR]: (state, action) => {
+        const counters = state.get('counters');
+
+        return state.set('counters', counters.update(
+            action.payload.index, 
+            (counter) => counter.set('color', action.payload.color))
+        );
+    },
+}, initialState);
+```
+
+참고 : https://velopert.com/3358
+https://velog.io/@velopert/Redux-3-%EB%A6%AC%EB%8D%95%EC%8A%A4%EB%A5%BC-%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%99%80-%ED%95%A8%EA%BB%98-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-nvjltahf5e
