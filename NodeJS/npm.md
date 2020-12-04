@@ -52,6 +52,30 @@ npm install [package_name] --save-dev
 
 npm install 명령어를 사용하면 package.json에 명시된 모든 의존 패키지를 한번에 설치할 수 있다.
 
+
+
+## dependencies
+
+```bash
+npm install jquery
+```
+
+## devDependencies
+
+```bash
+npm i vue -D
+npm i vue --save-dev
+```
+
+**dependencies** : 애플리케이션 로직과 연관된다. 화면과 직접적인 연관이 있다. 돔을 조작한다
+ex: react, chart, vue, angular ...
+(배포용 라이브러리) : npm run bulid 할 때, 설치 된다.
+
+**devDependencies** : 개발용 보조 라이브러리
+ex: webpack, js-compression, sass ...
+(개발용 라이브러리)
+최종 서버에 배포할때는 devDependencies는 배포되지않기때문에 설치되지 않는다.
+
 ## Reference
 
 > https://jaddong.tistory.com/entry/npm-install-save-save-dev-%EC%B0%A8%EC%9D%B4
