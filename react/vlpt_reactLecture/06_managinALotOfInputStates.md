@@ -58,12 +58,42 @@ export default InputSample;
 객체 상태를 업데이트할때, 기존상태를 한번 복사 하고 나서(스프레드 문법 사용)
 특정값을 덮어씌우고 새로운 값을 덮어준다
 불변성을 지켜준다
-리액트 컴포넌트에서 상태 없데이트 됬음을 감지할 수 있다.
+리액트 컴포넌트에서 상태 업데이트 되었음을 감지할 수 있다.
 이에따라 필요한 렌더링이 발생하게 된다.
 
 불변성을 지켜주어야만 컴포넌트 업데이트 성능을 최적화 할 수 있다.
 
-
-
-
-
+> 불변성을 지키다?
+>
+> setState나 dispatch를 이용해서 상태를 바꾸지 않으면 
+> 재렌더링이 일어나지 않는다. 
+>
+> 그리고 위의 메소드를 쓸 경우, 이전state와 비교하기 위해서 불변성을 유지해줘야함.
+>
+> 아래와같이 코드를 작성해본다 가정하면
+>
+> ```js
+> const array = [1, 2 ,3 ,4];
+> const sameArray = array;
+> sameArray.push(5);
+> console.log(array !== sameArray); // false
+> ```
+>
+> 위와같이 false가 나온다.
+> 그 이유는, 기존의 배열을 복사한것이 아니라 똑같은 배열을 가르키고 있는 래퍼런스가 하나 만들어진 것이기 때문이다.
+>
+> 그래서 불변성을 유지하려면
+>
+> ```js
+> const array = [1, 2 ,3 ,4];
+> const differentArray = [...array, 5];
+> // or  = array.concat(5)
+> console.log(array !== sameArray); // true
+> ```
+>
+> 위와같이 코드를 작성하면 된다.
+> 그럼 그때그때 원본 array와 변경된 array를 비교할 수 있다.
+>
+> 불변성을 유지함으로 side-effect가 줄어들고 컴포넌트 최적화가 가능하다.
+>
+> 재랜더링을 피하기 위해 `shouldComponentUpdate` `useCallback` 사용한다.
