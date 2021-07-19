@@ -1,0 +1,19 @@
+{
+  "name": "my-react",
+  "version": "1.0.0",
+  "description": "아래 URL 참고하였습니다. https://bluewings.github.io/build-your-own-react/",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel app.js -d dist -w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5"
+  }
+}

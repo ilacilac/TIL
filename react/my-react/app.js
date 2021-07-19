@@ -1,37 +1,78 @@
-// element => type & props를 객체 속성값으로 가지는 객체
-// type : tagName, 노드 생성
-// props : JSX의 key,value의 객체 => children
-// children : 문자열 하나 => textNode 하나
+// JSX
+// const element = (
+//   <div id="foo">
+//     <a>bar</a>
+//     <b />
+//   </div>
+// );
 
-// const element = <h1 title="foo">Hello</h1>;
 // const element = React.createElement(
-//   "h1",
-//   {title: "foo"},
-//   "Hello"
+//   "div",
+//   {id, "foo"},
+//   React.createElement("a", null, "bar"),
+//   React.createElement("b")
 // )
-const element = {
-  type: "h1",
-  props: {
-    title: "foo",
-    children: "Hello",
-  },
-};
 
-const node = document.createElement(element.type);
-node["title"] = element.props.title;
-
-// element => React element
-// node => DOM element
-// ReactDOM.render(element, contianer);
 const container = document.getElementById("root");
 
-const text = document.createTextNode("");
-text["nodeValue"] = element.props.children;
+function createElement(type, props, ...children) {
+  return {
+    type,
+    props: {
+      ...props,
+      // children, // string, number ... 기본타입의 값 =>객체가 아닌 모든것들을 감싸서 TEXT_ELEMENT 타입으로 생성 할 수 있음
+      children: children.map((child) =>
+        typeof child === "object" ? child : createTextElement(child)
+      ),
+    },
+  };
+}
 
-console.log(node); // <h1 title="foo"></h1>
-console.log(text); // "Hello"
+function createTextElement(text) {
+  return {
+    type: "TEXT_ELEMENT",
+    props: {
+      nodeValue: text,
+      children: [],
+    },
+  };
+}
 
-node.appendChild(text);
-container.appendChild(node);
+function render(element, container) {
+  const dom =
+    element.type === "TEXT_ELEMENT"
+      ? document.createTextNode("")
+      : document.createElement(element.type);
 
-// git commit test
+  const isProperty = (key) => key !== "children";
+  Object.keys(element.props)
+    .filter(isProperty)
+    .forEach((name) => {
+      dom[name] = element.props[name];
+    });
+
+  element.props.children.forEach((child) => render(child, dom));
+
+  container.appendChild(dom);
+}
+
+const Didact = {
+  createElement,
+  render,
+};
+
+// const element = Didact.createElement(
+//   Didact.createElement("a", null, "bar"),
+//   Didact.createElement("b")
+// );
+// console.log(element);
+/** @jsx Didact.createElement */
+const element = (
+  <div id="foo">
+    <a>bar</a>
+    <b />
+  </div>
+);
+
+// ReactDOM.render(element, contaiener);
+Didact.render(element, container);
