@@ -1,11 +1,11 @@
 {
   "name": "my-react",
   "version": "1.0.0",
-  "description": "아래 URL 참고하였습니다. https://bluewings.github.io/build-your-own-react/",
+  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel app.js -d dist -w"
+    "build": "babel app.js -d dist -w --source-maps inline"
   },
   "keywords": [],
   "author": "",
