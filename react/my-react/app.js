@@ -80,36 +80,75 @@ function createTextElement(text) {
  * 1. DOM에 element 추가
  * 2. 각 element의 children에 대해 fiber 생성
  * 3. 다음 작업단위 선택
+ * if (fiber) ? child : sibling;
+ * ??최하위, 형제, 부모도 없을 때, 형제가 있는 조상으로 도달하는 과정!
+ * => 루트 도달시 렌더링 작업 수행 끝
  */
 function createDom(fiber) {
+  // Create Text node || DOM Node and Return
   const dom =
     fiber.type === "TEXT_ELEMENT"
       ? document.createTextNode("")
       : document.createElement(fiber.type);
 
+  // fiber props가 children이 아닌것들 => Node[props] = fiber.props[props]
   const isProperty = (key) => key !== "children";
   Object.keys(fiber.props)
     .filter(isProperty)
     .forEach((name) => {
       dom[name] = fiber.props[name];
     });
-
   return dom;
 }
 
+function commitRoot() {
+  // TODO add nodes to dom
+  commitWork(wipRoot.child);
+  currentRoot = wipRoot;
+  wipRoot = null;
+}
+
+function commitWork(fiber) {
+  if (!fiber) {
+    return;
+  }
+  const domParent = fiber.parent.dom;
+  domParent.appendChild(fiber.dom);
+  commitWork(fiber.child);
+  commitWork(fiber.sibling);
+}
+
 function render(element, container) {
-  nextUnitOfWork = {
+  // render 실행 => fiber tree root에 nextUnitOfWork 설정
+  //
+  // nextUnitOfWork = {
+  //   dom: container,
+  //   props: {
+  //     children: [element],
+  //   },
+  // };
+  // 5. Render / commit
+  wipRoot = {
     dom: container,
     props: {
       children: [element],
     },
+    // 6. 재조정
+    alternate: currentRoot,
   };
+  nextUnitOfWork = wipRoot;
 }
 
-let nextUnitOfWork = null;
+// let nextUnitOfWork = null;
+// 5. Render / commit
+let wipRoot = null;
+// 6. 재조정
+let currentRoot = null;
 
 // 3. 동시성 모드
-// ?? requestIdleCallback => setTimeout 같은것, 메인 스레드가 대기 상태일 때, 브라우저가 콜백을 실행할것
+// ??어디서 호출 => 브라우저가 호출
+// requestIdleCallback => setTimeout 같은것, 메인 스레드가 대기 상태일 때, 브라우저가 콜백을 실행할것
+// ?? deadline.timeRemaining
 /**
  * 작업을 더 작은단위로 나눈 다음,
  * 각 단위마다 브라우저가 어떤 작업이 필요할 경우, 렌더링 도중 끼어들 수 있게 해준다.
@@ -126,40 +165,18 @@ requestIdleCallback(workLoop);
 
 /**
  * 반복문을 시작하려면 작업단위를 설정해야한다.
- * @param {*} nextUnitOfWork
+ * 새로운 노드를 생성하고 DOM에 추가한다.
+ * fiber.dom 속성 내부의 DOM 노드를 추적
+ * workLoop의 반복문에서 호출
+ * @param {*} fiber
  */
-function performUnitOfWork(nextUnitOfWork) {
+function performUnitOfWork(fiber) {
   if (!fiber.dom) {
     fiber.dom = createDom(fiber);
   }
 
-  if (fiber.parent) {
-    fiber.parent.dom.appendChild(fiber.dom);
-  }
-
   const elements = fiber.props.children;
-  let index = 0;
-  let prevSibling = null;
-
-  while (index < elements.length) {
-    const element = elements[index];
-
-    const newFiber = {
-      type: element.type,
-      props: element.props,
-      parent: fiber,
-      dom: null,
-    };
-
-    if (index === 0) {
-      fiber.child = newFiber;
-    } else {
-      prevSibling.sibling = newFiber;
-    }
-
-    prevSibling = newFiber;
-    index++;
-  }
+  reconcileChildren(fiber, elements);
 
   if (fiber.child) {
     return fiber.child;
@@ -173,16 +190,47 @@ function performUnitOfWork(nextUnitOfWork) {
   }
 }
 
+function reconcileChildren(wipFiber, elements) {
+  let index = 0;
+  let oldFiber = wipFiber.alternate && wipFiber.alternate.child;
+  let prevSibling = null;
+
+  while (index < elements.length || oldFiber != null) {
+    const element = elements[index];
+
+    const newFiber = null;
+
+    // TODO compare oldFiber to element
+
+    if (oldFiber) {
+      oldFiber = oldFiber.sibling;
+    }
+
+    if (index === 0) {
+      fiber.child = newFiber;
+    } else {
+      prevSibling.sibling = newFiber;
+    }
+
+    prevSibling = newFiber;
+    index++;
+  }
+}
+
 const Didact = {
   createElement,
   render,
 };
 
-// const element = Didact.createElement(
-//   Didact.createElement("a", null, "bar"),
-//   Didact.createElement("b")
-// );
-
+// JSX React.createElement(component, props, ...children) 함수에 Syntax Sugar 제공
+/**
+ * <div className="sidebar" />
+ * 아래와 같이 컴파일된다.
+ * React.createElement(
+ * 'div',
+ * {className: 'sidebar'}
+ * )
+ */
 /** @jsx Didact.createElement */
 const element = (
   <div id="foo">
