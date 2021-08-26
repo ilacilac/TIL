@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Popup</title>
+  </head>
+  <style>
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 25px;
+      width: 50%;
+      height: 300px;
+      background: #ededed;
+    }
+
+    .popup.active {
+      display: flex;
+    }
+  </style>
+  <body>
+    <section class="notice">
+      <h2>Title Example</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi,
+        voluptatibus minus quisquam enim vitae illum? Atque, quasi ullam libero
+        adipisci dicta voluptates culpa iure recusandae quia officia, at eaque a
+        id dolore labore eligendi nisi iusto aliquam eius quisquam. Sequi,
+        incidunt ullam commodi voluptates illo sit facere ipsum perferendis
+        quibusdam quasi alias laudantium obcaecati consequuntur quis ad quam
+        nostrum accusamus debitis voluptatem laboriosam, repellat praesentium
+        inventore possimus! Et ducimus tempora beatae sint sed earum architecto.
+        Officiis, distinctio quos tenetur illum eaque numquam. Fugit magni dicta
+        ut soluta! Vel cumque officiis neque magnam voluptas aspernatur
+        obcaecati exercitationem laudantium animi ipsam similique nisi nostrum,
+        doloremque veritatis consequuntur natus voluptatibus esse quia adipisci
+        eligendi. Incidunt alias, commodi expedita quis odio doloremque
+        laudantium, molestiae illo provident totam ex facilis possimus velit
+        voluptates? Illo, culpa, placeat aliquid eligendi ducimus dolorum quas
+        deleniti nemo dicta, qui voluptate molestiae sunt recusandae quaerat rem
+        amet neque? Ipsa suscipit vero quis, animi molestias eius sunt ipsum
+        est, culpa iure impedit optio nulla quasi vitae aperiam. Animi sequi
+        deleniti nihil reprehenderit veniam, quisquam voluptatum iusto quam
+        maiores ipsam id atque accusamus repellendus a saepe dolore perferendis
+        deserunt expedita quae. Iusto, quo qui! Repudiandae totam doloremque
+        animi eaque magnam natus magni?
+      </p>
+    </section>
+
+    <section class="popup active">
+      <h2>EVENT</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem
+        culpa mollitia quo itaque unde numquam quibusdam eius deserunt, quae hic
+        officiis accusantium dignissimos aperiam, soluta esse exercitationem
+        quam harum quisquam!
+      </p>
+      <div class="popup__button-wrap">
+        <button class="popup__button-wrap--close">닫기</button>
+        <button class="popup__button-wrap--never-open">다시열지않기</button>
+      </div>
+    </section>
+
+    <script>
+      const $popup = document.querySelector(".popup");
+      const $popupButtonWrap = document.querySelector(".popup__button-wrap");
+
+      const $popupCloseButton = document.querySelector(
+        ".popup__button-wrap--close"
+      );
+      const $popupNeverOpenButton = document.querySelector(
+        ".popup__button-wrap--never-open"
+      );
+
+      const getPopupCookie = () => {
+        const cookies = document.cookie.split(";");
+        const popupCookieName = "popup=";
+        console.log(cookies);
+
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i];
+          while (cookie.charAt(0) === "") {
+            cookie = cookie.substring(1);
+          }
+          if (cookie.indexOf(popupCookieName) === 0) {
+            return cookie.substring(popupCookieName.length, cookie.length);
+          }
+        }
+
+        if (!cookies) {
+          setPopupCookie();
+          return;
+        }
+      };
+
+      const setPopupCookie = () => {
+        // document.cookie = "popup=false";
+        document.cookie = "popup=false; expire=Fri, 24 Sep 2021 12:00:00 UTC";
+      };
+
+      window.addEventListener("DOMContentLoaded", (e) => {
+        getPopupCookie();
+      });
+
+      $popupButtonWrap.addEventListener("click", (e) => {
+        if (!e.target.matches("button")) return false;
+
+        if (e.target.classList.contains("popup__button-wrap--close")) {
+          $popup.classList.remove("active");
+          return;
+        }
+
+        if (e.target.classList.contains("popup__button-wrap--never-open")) {
+          return;
+        }
+      });
+    </script>
+  </body>
+</html>
