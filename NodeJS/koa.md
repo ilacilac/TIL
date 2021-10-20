@@ -3,6 +3,21 @@
 - Node.js로 서버를 개발 할 때 사용
 - 미들웨어의 배열로 구성되어있다.
 
+## express와 차이점
+- Koa에서 지원하는 것은 미들웨어일 뿐, 추가적인 기능은 따로 라이브러리로 설치해줘야 한다.
+ex) koa-router
+- 비동기처리 시, express처럼 콜백으로 처리하지 않고, next()와 같은 메소드를 사용한다.
+ex) async/await와 같이 사용하게 되면 데이터베이스에서 요청을 할 때 유용하게 사용할 수 있다 -> 콜백이 여러개 겹칠일이 없기때문
+
+```js
+app.use(async (ctx, next) => {
+  console.log(1);
+  const started = new Date();
+  await next();
+  console.log(new Date() - started + 'ms');
+});
+```
+
 ```jsx
 const Koa = require('koa');
 const app = new Koa();
