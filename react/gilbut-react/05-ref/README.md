@@ -33,9 +33,22 @@
   }
   ```
   !! 자기 자신을 ref로 설정해서 멤버 변수로 설정하는 느낌
-  !! code level VS DOM level
-  - id, class 말고 ref를 사용하는 이유
-  - 
+  
+1. id, class X
+- 컴포넌트의 특성상 재활용 및 컴포넌트의 변동으로 인해
+해당 컴포넌트의 특정 노드를 잡아낼 수 없다.
+
+2. code / dom level
+(ref) => {ref}
+createRef()
+
+3. current
+
+(ref) => { this.node = ref (document element) }
+{current: document element} = createRef()
+
+call by value / reference -> 값이냐 주소값이냐
+
 
 ## Reference
 https://ko.reactjs.org/docs/refs-and-the-dom.html
