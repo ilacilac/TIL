@@ -1,15 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
-import ValidationSample from './ValidationSample';
+import React, {Component} from 'react';
 import ScrollBox from './ScrollBox';
+// import ValidationSample from './ValidationSample';
 
-function App() {
-  return (
-    <>
-      <ValidationSample />
-      <ScrollBox />
-    </>
-  );
+class App extends Component {
+  render() {
+    return (
+      <>
+        {/* <ValidationSample /> */}
+        <ScrollBox ref={ref => this.scrollDown = ref}/>
+        <button onClick={() => {this.scrollDown.scrollToBottom()}}>아래로</button>
+      </>
+    );
+  }
 }
 
 export default App;

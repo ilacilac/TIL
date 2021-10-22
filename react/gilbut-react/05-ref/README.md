@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+# ref
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- 컴포넌트 내부에서 DOM을 직접 접근할 때
+  포커스, 텍스트 선택영역, 혹은 미디어의 재생을 관리할 때.
+  애니메이션을 직접적으로 실행시킬 때.
+  서드 파티 DOM 라이브러리를 React와 같이 사용할 때.
+- ref를 통해 데이터 교류 지양
 
-## Available Scripts
+## 사용방법
+- React.createRef() : React 16.3
+  1. React.createRef()를 통해 생성
+  2. ref Attr를 통해 React element에 부착
+- Callback ref
+  1. ref를 달고자하는 요소에 ref라는 콜백함수를 props로 전달
+  ```jsx
+  <div ref={() => {}}></div>
+  ```
+  2. 이 콜백함수는 ref 값을 파라미터로 전달 받는다.
+  ```jsx
+  <div ref={(ref) => {}}></div>
+  ```
+  3. 함수 내부에서 파라미터로 받은 ref를 컴포넌트의 멤버 변수로 설정
+  ```jsx
+  <div ref={(ref) => {this.rate = { top: ref.top, bottom: ref.bottom }}}></div>
+  ```
+  4. 그 멤버 변수는 해당 ref를 가리킨다.
+  ```jsx
+  class a extends Component { 
+    scrollbox = ref;
+    render() {
 
-In the project directory, you can run:
+    }
+  }
+  ```
+  !! 자기 자신을 ref로 설정해서 멤버 변수로 설정하는 느낌
+  !! code level VS DOM level
+  - id, class 말고 ref를 사용하는 이유
+  - 
 
-### `yarn start`
+## Reference
+https://ko.reactjs.org/docs/refs-and-the-dom.html
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
