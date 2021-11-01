@@ -1,13 +1,19 @@
 import React from 'react';
 import TodoTemplate from './components/TodoTemplate';
 import styled from 'styled-components';
+import TodoInsert from './components/TodoInsert';
 
 const GlobalStyle = styled.div`
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 `;
+
+const insertTodo = (e) => {
+  console.log(e);
+};
 
 const App = () => {
   const todos = [
@@ -17,7 +23,8 @@ const App = () => {
   ];
   return (
     <GlobalStyle>
-      <TodoTemplate todos={todos} />
+      <TodoInsert />
+      <TodoTemplate todos={todos} insertTodo={insertTodo} />
     </GlobalStyle>
   );
 };
