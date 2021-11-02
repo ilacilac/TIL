@@ -13,10 +13,10 @@ const TodoTemplateStyle = styled.div`
   background: #ffffff;
 `;
 
-const TodoTemplate = ({ todos }) => {
+const TodoTemplate = ({ todos, changingDone }) => {
   return (
-    <TodoTemplateStyle todos={todos}>
-      <TodoList todos={todos} />
+    <TodoTemplateStyle>
+      <TodoList todos={todos} changingDone={changingDone} />
     </TodoTemplateStyle>
   );
 };

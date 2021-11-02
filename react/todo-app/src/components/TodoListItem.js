@@ -1,11 +1,23 @@
 import React from 'react';
+import styled from 'styled-components';
 
-const TodoListItem = ({ todo }) => {
+const TodoListItemStyle = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const TodoListItem = ({ todo, changingDone, id }) => {
   return (
-    <div>
+    <TodoListItemStyle>
       <p>{todo.content}</p>
-      <input type="checkbox" defaultChecked={todo.done} />
-    </div>
+      <input
+        type="checkbox"
+        defaultChecked={todo.done}
+        onClick={(e) => {
+          changingDone(e, id);
+        }}
+      />
+    </TodoListItemStyle>
   );
 };
 
