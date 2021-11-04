@@ -4,13 +4,14 @@ import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
 
 const TodoTemplateStyle = styled.div`
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
-  width: 50%;
-  height: 450px;
-  padding: 50px 20px;
+  width: 40%;
+  height: 350px;
+  padding: 20px 20px;
   background: #ffffff;
 `;
 
@@ -25,6 +26,13 @@ const TodoTemplate = () => {
     { id: 1, content: 'Studying', done: false },
     { id: 2, content: 'Working out', done: true },
     { id: 3, content: 'Reading a book', done: false },
+    { id: 4, content: 'To do id 4', done: true },
+    { id: 5, content: 'To do id 5', done: false },
+    { id: 6, content: 'To do id 6', done: true },
+    { id: 7, content: 'To do id 7', done: true },
+    { id: 8, content: 'To do id 8', done: false },
+    { id: 9, content: 'To do id 9', done: true },
+    { id: 10, content: 'To do id 10', done: false },
   ]);
 
   const toggleDone = useCallback((id) => {

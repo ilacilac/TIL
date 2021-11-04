@@ -7,6 +7,13 @@ const TodoListItemStyle = styled.li`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: 50px;
+  & + & {
+    border-top: 1px solid #dee2e6;
+  }
+  &:nth-child(even) {
+    background: #eee;
+  }
 `;
 
 const TodoCheckStyle = styled.div``;
@@ -25,11 +32,11 @@ const TodoDeleteBtnStyle = styled.button`
   background: transparent;
 `;
 
-const TodoListItem = ({ todo, toggleDone, deleteTodo }) => {
+const TodoListItem = ({ todo, toggleDone, deleteTodo, style }) => {
   const { id, content, done } = todo;
 
   return (
-    <TodoListItemStyle>
+    <TodoListItemStyle style={style}>
       <TodoCheckStyle
         onClick={() => {
           toggleDone(id);
