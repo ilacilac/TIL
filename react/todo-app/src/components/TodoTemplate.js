@@ -8,10 +8,16 @@ const TodoTemplateStyle = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 30%;
+  width: 50%;
   height: 450px;
-  padding: 50px;
+  padding: 50px 20px;
   background: #ffffff;
+`;
+
+const TodoListStyle = styled.ul`
+  width: 100%;
+  margin: 0;
+  padding: 0;
 `;
 
 const TodoTemplate = () => {
@@ -21,40 +27,49 @@ const TodoTemplate = () => {
     { id: 3, content: 'Reading a book', done: false },
   ]);
 
-  const [content, setContent] = useState('');
+  const toggleDone = useCallback((id) => {
+    // const targetTodo = todos.filter((todo) => todo.id === id)[0]; // [{}]
+    // const newTodo = {...targetTodo, done: !targetTodo.done};
+    // const newTodos = todos.map(todo => todo.id === id ? newTodo : todo);
 
-  const id = Math.max(...todos.map((todo) => todo.id)) + 1;
+    // const newTodos = todos.map((todo) => {
+    //   if (todo.id !== id) return todo;
+    //   return { ...todo, done: !done };      
+    // });
 
-  const changingDone = useCallback((e, id) => {
-    const done = e.currentTarget.checked;
-    const newTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return { ...todo, done };
-      } else {
-        return todo;
-      }
-    });
+    const newTodos = todos.map(todo => todo.id === id ? {...todo, done: !todo.done} : todo);
     setTodos(newTodos);
   },[todos]);
 
-  const insertTodo = () => {
+  const insertTodo = useCallback((content) => {
+    const id = Math.max(...todos.map((todo) => todo.id)) + 1;
+
+    const newTodo = {
+      id,
+      content,
+      done: false,
+    };
+
     setTodos([
       ...todos,
-      {
-        id,
-        content,
-        done: false,
-      },
+      newTodo
     ]);
-  };
+  }, [todos]);
 
-  const onChange = (e) => {
-    setContent(e.currentTarget.value);
-  };
+  const deleteTodo = useCallback((id) => {
+    const newTodos = todos.filter(todo => {
+      return todo.id !== id;
+    });
+    console.log(newTodos)
+    setTodos(newTodos);
+  }, [todos]);
+
   return (
     <TodoTemplateStyle>
-      <TodoInsert insertTodo={insertTodo} onChange={onChange} />
-      <TodoList todos={todos} changingDone={changingDone} />
+      <TodoInsert insertTodo={insertTodo} />
+      <TodoListStyle>
+        <TodoList todos={todos} toggleDone={toggleDone} deleteTodo={deleteTodo} />
+      </TodoListStyle>
     </TodoTemplateStyle>
   );
 };

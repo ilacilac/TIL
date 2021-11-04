@@ -8,6 +8,7 @@ const GlobalStyle = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  color: #2b2b2b;
 `;
 
 const App = () => { 
