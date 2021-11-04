@@ -1,0 +1,6 @@
+- Hooks(useState / useEffect) → Closure
+    - [https://www.youtube.com/watch?v=KJP1E-Y-xyo](https://www.youtube.com/watch?v=KJP1E-Y-xyo)
+- MVC / 분리
+- useMemo
+- useCallback → ex : ref.current.addEventListener('click', a) → 같은주소값
+- HOC
