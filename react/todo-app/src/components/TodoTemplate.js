@@ -34,41 +34,59 @@ const TodoTemplate = () => {
 
     // const newTodos = todos.map((todo) => {
     //   if (todo.id !== id) return todo;
-    //   return { ...todo, done: !done };      
+    //   return { ...todo, done: !done };
     // });
 
-    const newTodos = todos.map(todo => todo.id === id ? {...todo, done: !todo.done} : todo);
-    setTodos(newTodos);
-  },[todos]);
+    // const newTodos = todos.map((todo) =>
+    //   todo.id === id ? { ...todo, done: !todo.done } : todo,
+    // );
+    // setTodos(newTodos);
 
-  const insertTodo = useCallback((content) => {
-    const id = Math.max(...todos.map((todo) => todo.id)) + 1;
+    // 최적화
+    setTodos((todos) =>
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, done: !todo.done } : todo,
+      ),
+    );
+  }, []);
 
-    const newTodo = {
-      id,
-      content,
-      done: false,
-    };
+  const insertTodo = useCallback(
+    (content) => {
+      const id = Math.max(...todos.map((todo) => todo.id)) + 1;
 
-    setTodos([
-      ...todos,
-      newTodo
-    ]);
-  }, [todos]);
+      // const newTodo = {
+      //   id,
+      //   content,
+      //   done: false,
+      // };
+      // setTodos([...todos, newTodo]);
+
+      // 최적화
+      setTodos((todos) => [...todos, { id, content, done: false }]);
+    },
+    [todos],
+  );
 
   const deleteTodo = useCallback((id) => {
-    const newTodos = todos.filter(todo => {
-      return todo.id !== id;
-    });
-    console.log(newTodos)
-    setTodos(newTodos);
-  }, [todos]);
+    // const newTodos = todos.filter(todo => {
+    //   return todo.id !== id;
+    // });
+    // console.log(newTodos)
+    // setTodos(newTodos);
+
+    // 최적화
+    setTodos((todos) => todos.filter((todo) => todo.id !== id));
+  }, []);
 
   return (
     <TodoTemplateStyle>
       <TodoInsert insertTodo={insertTodo} />
       <TodoListStyle>
-        <TodoList todos={todos} toggleDone={toggleDone} deleteTodo={deleteTodo} />
+        <TodoList
+          todos={todos}
+          toggleDone={toggleDone}
+          deleteTodo={deleteTodo}
+        />
       </TodoListStyle>
     </TodoTemplateStyle>
   );

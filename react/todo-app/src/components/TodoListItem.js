@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { MdDelete, MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
+import { MdDelete, MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md';
 
 const TodoListItemStyle = styled.li`
   display: flex;
@@ -9,9 +9,7 @@ const TodoListItemStyle = styled.li`
   width: 100%;
 `;
 
-const TodoCheckStyle = styled.div`
-  
-`;
+const TodoCheckStyle = styled.div``;
 
 const TodoContentStyle = styled.p`
   // flex-grow: 2;
@@ -27,23 +25,32 @@ const TodoDeleteBtnStyle = styled.button`
   background: transparent;
 `;
 
-
 const TodoListItem = ({ todo, toggleDone, deleteTodo }) => {
-  const {id, content, done } = todo;
+  const { id, content, done } = todo;
 
   return (
     <TodoListItemStyle>
       <TodoCheckStyle
-        onClick={() => {toggleDone(id)}}
+        onClick={() => {
+          toggleDone(id);
+        }}
       >
-        {done ? <MdCheckBox size="20" color="#e91762" /> : <MdCheckBoxOutlineBlank size="20" color="#e91762" />}
+        {done ? (
+          <MdCheckBox size="20" color="#e91762" />
+        ) : (
+          <MdCheckBoxOutlineBlank size="20" color="#e91762" />
+        )}
       </TodoCheckStyle>
       <TodoContentStyle>{content}</TodoContentStyle>
-      <TodoDeleteBtnStyle onClick={() => {deleteTodo(id)}}>
-        <MdDelete aria-label="삭제" color="#666666"/>
+      <TodoDeleteBtnStyle
+        onClick={() => {
+          deleteTodo(id);
+        }}
+      >
+        <MdDelete aria-label="삭제" color="#666666" />
       </TodoDeleteBtnStyle>
     </TodoListItemStyle>
   );
 };
 
-export default TodoListItem;
+export default React.memo(TodoListItem);

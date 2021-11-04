@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
 const TodoInsertStyle = styled.div`
@@ -25,6 +25,7 @@ const TodoInsertButtonStyle = styled.button`
 `;
 
 const TodoInsert = ({ insertTodo }) => {
+  const inputRef = useRef();
   const [content, setContent] = useState('');
 
   const onChange = (e) => {
@@ -33,11 +34,12 @@ const TodoInsert = ({ insertTodo }) => {
 
   const onSubmit = () => {
     insertTodo(content);
-  }
+    inputRef.current.value = '';
+  };
 
   return (
     <TodoInsertStyle>
-      <TodoInputStyle type="text" onChange={onChange} />
+      <TodoInputStyle type="text" onChange={onChange} ref={inputRef} />
       <TodoInsertButtonStyle onClick={onSubmit}>등록</TodoInsertButtonStyle>
     </TodoInsertStyle>
   );

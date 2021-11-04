@@ -12,4 +12,4 @@ const TodoList = ({ todos, toggleDone, deleteTodo }) => {
   ));
 };
 
-export default TodoList;
+export default React.memo(TodoList);
