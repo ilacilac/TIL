@@ -4,20 +4,22 @@ import styled from 'styled-components';
 const TodoInsertStyle = styled.div`
   display: flex;
   justify-content: space-between;
+  justify-content: center;
   width: 100%;
+  margin: 20px 0;
 `;
 
 const TodoInputStyle = styled.input`
-  width: 85%;
-  height: 30px;
+  width: 70%;
+  height: 50px;
   border: 1px solid #cccccc;
   border-radius: none;
   box-shadow: none;
   box-sizing: border-box;
 `;
 const TodoInsertButtonStyle = styled.button`
-  width: 15%;
-  height: 30px;
+  width: 10%;
+  height: 50px;
   border: none;
   color: #ffffff;
   box-sizing: border-box;

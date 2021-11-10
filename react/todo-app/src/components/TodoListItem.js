@@ -8,6 +8,8 @@ const TodoListItemStyle = styled.li`
   align-items: center;
   width: 100%;
   height: 50px;
+  padding: 0 0 0 20px;
+  box-sizing: border-box;
   & + & {
     border-top: 1px solid #dee2e6;
   }

@@ -5,13 +5,13 @@ import TodoList from './TodoList';
 
 const TodoTemplateStyle = styled.div`
   overflow-y: scroll;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 40%;
+  width: 500px;
   height: 350px;
-  padding: 20px 20px;
   background: #ffffff;
 `;
 
@@ -21,19 +21,22 @@ const TodoListStyle = styled.ul`
   padding: 0;
 `;
 
+function createBulkTodos() {
+  const array = [];
+  for (let i = 1; i <= 2500; i++) {
+    array.push({
+      id: i,
+      content: `할 일 ${i}`,
+      done: false,
+    });
+  }
+  return array;
+}
+
+
 const TodoTemplate = () => {
-  const [todos, setTodos] = useState([
-    { id: 1, content: 'Studying', done: false },
-    { id: 2, content: 'Working out', done: true },
-    { id: 3, content: 'Reading a book', done: false },
-    { id: 4, content: 'To do id 4', done: true },
-    { id: 5, content: 'To do id 5', done: false },
-    { id: 6, content: 'To do id 6', done: true },
-    { id: 7, content: 'To do id 7', done: true },
-    { id: 8, content: 'To do id 8', done: false },
-    { id: 9, content: 'To do id 9', done: true },
-    { id: 10, content: 'To do id 10', done: false },
-  ]);
+
+  const [todos, setTodos] = useState(createBulkTodos);
 
   const toggleDone = useCallback((id) => {
     // const targetTodo = todos.filter((todo) => todo.id === id)[0]; // [{}]
