@@ -1,10 +1,8 @@
 import React from "react";
 import qs from 'qs';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const About = () => {
-  // const params = useParams();
-  // const navigate = useNavigate();
   const location = useLocation();
 
   const query = qs.parse(location.search, {
