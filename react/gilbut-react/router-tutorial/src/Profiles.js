@@ -1,6 +1,7 @@
-import React from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
-import Profile from './Profile';
+import React from "react";
+import { Link, Route, Routes } from "react-router-dom";
+import Profile from "./Profile";
+import WithRouter from "./withRouter";
 
 const Profiles = () => {
   return (
@@ -18,8 +19,10 @@ const Profiles = () => {
         <Route path=":username" element={<Profile />} />
         <Route path="/" element={<div>사용자를 선택해주세요.</div>} />
       </Routes>
+      <hr />
+      <WithRouter />
     </div>
-  )
-}
+  );
+};
 
 export default Profiles;

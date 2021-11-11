@@ -1,12 +1,12 @@
 import React from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 import About from "./About";
 import Home from "./Home";
-import Profile from "./Profile";
 import Profiles from "./Profiles";
-// import Profile from "./Profile";
+import HistorySample from "./HistorySample";
 
 const App = () => {
+  const location = useLocation();
   return (
     <div>
       <ul>
@@ -25,21 +25,27 @@ const App = () => {
         <li>
           <Link to="/profiles">프로필</Link>
         </li>
+        <li>
+          <Link to="/history">History 예제</Link>
+        </li>
       </ul>
       <hr />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        {/* <Route path="/profile/:username" element={<Profile />} /> */}
-        {/* <Route path="/profiles/*" element={<Profiles />} /> */}
-
-        {/* <Route path="profiles/*" element={<Profiles />}>
-          <Route path=":username" element={<Profile />} />
-        </Route> */}
-
         <Route path="/profiles/*" element={<Profiles />} />
+        <Route path="/history" element={<HistorySample />} />
+        <Route
+          path="*"
+          element={
+            <div>
+              <h2>이 페이지는 존재하지 않아요!</h2>
+              <p>{location.pathname}</p>
+            </div>
+          }
+        />
       </Routes>
-    </div >
+    </div>
   );
 };
 
