@@ -12,7 +12,7 @@ export default function usePromise(promiseCreator, deps) {
         const resolved = await promiseCreator();
         setResolved(resolved);
       } catch (e) {
-        console.error(e);
+        setError(e);
       }
       setLoading(false);
     };
