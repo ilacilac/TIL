@@ -1,5 +1,5 @@
 ## ContextAPI
-global에 state들 관리하는곳과 별도로 context도 별도의 공간이 필요하기때문에 connect개념으로 연결시켜줘야한다.
+global에 state들 관리하는곳과 별도로 context도 별도의 공간이 필요하기때문에 connect개념으로(과거에는 HOC로) 연결시켜줘야한다.
 
 ## Redux vs ContextAPI
 diffrent : lib vs  React
