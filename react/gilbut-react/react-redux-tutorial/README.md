@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+## ES6에 너무 익숙해져있다. 
+- handleActions 에서 사용하는 { [key]: value } 형태
+- 객체축약기법
+```js
+const rootReducer = combineReducers({
+  counter,
+  todos,
+});
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+const rootReducer = combineReducers({
+  number: counter, // 이런식으로 store에 들어가는 state의 이름 변경
+  todos,
+});
+```
 
-## Available Scripts
+## store={store} 등록 시, 하위컴포넌트의 store을 props로 전달하는게 아닌, hooks를 전달해주는 것? vs props로 전달하는 것?
+```js
+/**
+ * Makes the Redux store available to the connect() calls in the component hierarchy below.
+ * Redux 저장소를 아래 구성 요소 계층 구조의 connect() 호출에 사용할 수 있도록 합니다.
+ */
+export class Provider<A extends Action = AnyAction> extends Component<ProviderProps<A>> { }
+```
 
-In the project directory, you can run:
+1. react-redux의 Provider을 최상위 컴포넌트로 wrap 시켜준다.
+2. Provider 컴포넌트에 store을 props로 설정해준다. 
+  -> store자체를 하위에서 props로 받지은 않지만(받지 않는것보다는 받지 못하는 느낌.. 이부분이 좀 어렵다.), props로 설정해줌으로 하위 컴포넌트에서 connect 함수를 사용할 수 있다. 
+  -> 이게 hooks를 전달해주는 의미가 맞는것인가?? 
+  -> 앱 전체에서 store에 접속해야한다.
+3. Provider을 통해 하위 컴포넌트에서는 react-redux의 connect 함수를 사용 할 수 있다.
+4. connect 함수를 통해 store에 연결시킨다. (HOC)
 
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Reference
+https://velog.io/@iamhayoung/React-Redux-React-Redux-%EC%9E%85%EB%AC%B8-Provider-Connect-mapStateToProps-mapDispatchToProps
