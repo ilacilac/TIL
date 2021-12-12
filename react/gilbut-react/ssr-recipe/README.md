@@ -3,3 +3,4 @@
    - "서버에서는 굳이 결과물 파일 안에 리액트 라이브러리가 들어 있지 않아도 됩니다 node_modules를 통해 바로 불러와서 사용할 수 있기 때문"
    - dev-server 얘기하는 것 같음. 그때는 node_modules에서 바로바로 불러올 수 있기 때문에
    - 이렇게 설정하기 위해서는 webpack-node-externals 라이브러리를 사용해야한다.
+3. state, redux-store의 상태가 바뀐다고 리렌더링이 되지 않아, renderToString 함수를 한번 더 호출해줘야 한다. 서버에서는 라이프사이클 api사용 불가
