@@ -149,7 +149,11 @@ module.exports = {
   resolve: {
     modules: ["node_modules"],
   },
-  externals: [nodeExternals()],
+  externals: [
+    nodeExternals({
+      allowlist: [/@babel/],
+    }),
+  ],
   plugins: [
     new webpack.DefinePlugin(env.stringified), // 환경변수 주입 -> 프로젝트 내에서 process.env.NODE_ENV값을 참조하여 현재개발환경 알 수 있음
   ],
