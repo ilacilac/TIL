@@ -9,7 +9,7 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(sass|scss)$/;
 const sassModuleRegex = /\.module\.(sass|scss)$/;
 
-const env = getClientEnvironment(path.publicUrlOrPath.slice(0, -1));
+const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
 
 module.exports = {
   mode: "production",
