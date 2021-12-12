@@ -1,13 +1,13 @@
-const nodeExternals = require("webpack-node-externals");
 const paths = require("./paths");
 const getCSSModuleLocalIdent = require("react-dev-utils/getCSSModuleLocalIdent");
+const nodeExternals = require("webpack-node-externals");
 const webpack = require("webpack");
 const getClientEnvironment = require("./env");
 
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
-const sassRegex = /\.(sass|scss)$/;
-const sassModuleRegex = /\.module\.(sass|scss)$/;
+const sassRegex = /\.(scss|sass)$/;
+const sassModuleRegex = /\.module\.(scss|sass)$/;
 
 const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
 
@@ -18,7 +18,7 @@ module.exports = {
   output: {
     path: paths.ssrBuild,
     filename: "server.js",
-    chunkFileName: "js/[name]/chunk.js",
+    chunkFilename: "js/[name].chunk.js",
     publicPath: paths.publicUrlOrPath,
   },
   module: {
@@ -147,7 +147,6 @@ module.exports = {
     ],
   },
   resolve: {
-    // node_modules 내부의 라이브러리 불러올 수 있게 설정
     modules: ["node_modules"],
   },
   externals: [nodeExternals()],
