@@ -8,3 +8,8 @@
 -> 서버는 이미 가지고있으니깐 build 할필요없다
 -> 파일 합칠때 번들안하겠다! (externals)
 3. state, redux-store의 상태가 바뀐다고 리렌더링이 되지 않아, renderToString 함수를 한번 더 호출해줘야 한다. 서버에서는 라이프사이클 api사용 불가
+4. react-router-dom v6에서는 useParams가 중첩 라우팅에서는 사용이 안된다
+(undefined반환 / SSR시, "No routes matched location "/users/1" 이런식의 메세지 반환)
+[참고1](https://github.com/remix-run/react-router/issues/7803)
+[참고2](https://github.com/remix-run/react-router/issues/7960) 
+[참고3](https://ui.dev/react-router-nested-routes/) 
