@@ -12,4 +12,6 @@
 (undefined반환 / SSR시, "No routes matched location "/users/1" 이런식의 메세지 반환)
 [참고1](https://github.com/remix-run/react-router/issues/7803)
 [참고2](https://github.com/remix-run/react-router/issues/7960) 
+
+(아래방법으로 될거같기도) 일단 v5로 돌려서 작업했음
 [참고3](https://ui.dev/react-router-nested-routes/) 
