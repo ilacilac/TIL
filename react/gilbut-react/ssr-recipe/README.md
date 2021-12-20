@@ -15,3 +15,18 @@
 
 (아래방법으로 될거같기도) 일단 v5로 돌려서 작업했음
 [참고3](https://ui.dev/react-router-nested-routes/) 
+
+---
+1.  SSR과 server
+
+2.
+- Rendering server
+- API server
+
+3. 
+- react Rendering -> html
+- server Rendering -> html
+- browser Rendering -> painting / flow
+
+4. proxy
+Next.js -> render / api server 통합이유 
