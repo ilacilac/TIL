@@ -93,6 +93,8 @@ If you encounter an issue with the template, we encourage you to open an issue i
 
 - 스토리북은 개발모드에서 앱과 함께 실행된다.
 - 앱의 비즈니스 로직 / 컨텍스트에서 격리된 UI 구성 요소를 빌드 할 수 있다.
+- 구성요소중심개발(CDD)
+- 구성요소에서 화면으로 끝나는 상향식에서 UI를 구축하는 프로세스
 
 ```bash
 # Clone the template
