@@ -1,6 +1,33 @@
 import Post from '../../models/post';
+import mongoose from 'mongoose';
+import Joi from 'joi';
+
+const { ObjectId } = mongoose.Types;
+
+export const checkObjectId = (ctx, next) => {
+  const { id } = ctx.params;
+  if (!ObjectId.isValid(id)) {
+    ctx.status = 400;
+    return;
+  }
+  return next();
+};
 
 export const write = async (ctx) => {
+  const schema = Joi.object().keys({
+    title: Joi.string().required(),
+    body: Joi.string().required(),
+    tags: Joi.array().items(Joi.string()).required(),
+  });
+
+  const validation = schema.validate(ctx.request.body);
+
+  if (validation.error) {
+    ctx.status = 400;
+    ctx.body = validation.error;
+    return;
+  }
+
   const { title, body, tags } = ctx.request.body;
   const post = new Post({
     title,
@@ -50,6 +77,20 @@ export const remove = async (ctx) => {
 };
 
 export const update = async (ctx) => {
+  const schema = Joi.object().keys({
+    title: Joi.string(),
+    body: Joi.string(),
+    tags: Joi.array().items(Joi.string()),
+  });
+
+  const validation = schema.validate(ctx.request.body);
+
+  if (validation.error) {
+    ctx.status = 400;
+    ctx.body = validation.error;
+    return;
+  }
+
   const { id } = ctx.params;
   try {
     const post = await Post.findByIdAndUpdate(id, ctx.request.body, {
