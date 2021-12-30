@@ -15,6 +15,8 @@ UserSchema.methods.setPassword = async function (password) {
 
 UserSchema.methods.checkPassword = async function (password) {
   // this : document instance
+  // ?? 로그인 시도하는 시점에서 this(인스턴스객체)를 참조할 수 있나?
+  // 여기서 this.hashedPassword는 mongodb에 저장되어있는 데이터!
   const reseult = await bcrypt.compare(password, this.hashedPassword);
   return reseult;
 };
