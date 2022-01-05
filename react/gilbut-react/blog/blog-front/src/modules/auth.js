@@ -14,6 +14,7 @@ const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
     const SUCCESS = `${type}_SUCCESS`;
     const FAILURE = `${type}_FAILURE`;
     return [type, SUCCESS, FAILURE];
+
     ["auth/REGISTER", "auth/REGISTER_SUCCESS", "auth/REGISTER_FAILURE"]
   };
  */
@@ -35,8 +36,8 @@ export const initializeForm = createAction(INITIALIZE_FORM, (form) => form); // 
 
 // 1
 /**
- * {
-    type : REGISTER
+ * ({ username, password }) => {
+    return type : REGISTER
     payload : { username, password }
   }
  */
@@ -81,13 +82,6 @@ export default function createRequestSaga(type, request) {
 }
 
  */
-const registerSaga = createRequestSaga(REGISTER, authAPI.register);
-const loginSaga = createRequestSaga(LOGIN, authAPI.login);
-
-export function* authSaga() {
-  yield takeLatest(REGISTER, registerSaga);
-  yield takeLatest(LOGIN, loginSaga);
-}
 
 const initialState = {
   register: {
@@ -102,6 +96,14 @@ const initialState = {
   auth: null,
   authError: null,
 };
+
+const registerSaga = createRequestSaga(REGISTER, authAPI.register);
+const loginSaga = createRequestSaga(LOGIN, authAPI.login);
+
+export function* authSaga() {
+  yield takeLatest(REGISTER, registerSaga);
+  yield takeLatest(LOGIN, loginSaga);
+}
 
 const auth = handleActions(
   {
