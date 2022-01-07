@@ -28,3 +28,14 @@ dispath({
 - localStorage가 없어도 되는 상황으로 만들어주기
 - localStorage가 없을경우를 Check해서 새로운 객체형태로 만들어주기
 - cookie에 저장하기
+
+## 25장
+
+1. reducer / saga 동시에 처리해줬을 때, 동작순서
+2. data를 state / redux로 관리했을 때 차이 -> 고민해보기
+
+- 전역으로 관리했을 때
+- store state = 저장소
+  임시 / 완료
+- item의 input 변경될 때 : [input, setInput] = useState('');
+- item 저장할 때 : dispatch()
