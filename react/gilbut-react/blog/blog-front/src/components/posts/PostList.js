@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import Responsive from '../common/Responsive';
 import Button from '../common/Button';
 import palette from '../../lib/palette';
+import { Link } from 'react-router-dom';
+import SubInfo from '../common/SubInfo';
+import Tags from '../common/Tags';
 
 const PostListBlock = styled(Responsive)`
   margin-top: 3rem;
@@ -36,59 +39,46 @@ const PostItemBlock = styled.div`
   }
 `;
 
-const SubInfo = styled.div`
-  color: ${palette.gray[6]};
-  
-  span + span:before {
-    content: '\\B7';
-    color: ${palette.gray[4]}
-    padding: 0 0.25rem;
-  }
-`;
-
-const Tags = styled.div`
-  margin-top: 0.5rem;
-  display: inline-block;
-  color: ${palette.cyan[7]};
-  text-decoration: none;
-  margin-right: 0.5rem;
-  &:hover {
-    color: ${palette.cyan[6]};
-  }
-`;
-
-const PostItem = () => {
+const PostItem = ({ post }) => {
+  const { publishedDate, user, tags, title, body, _id } = post;
   return (
     <PostItemBlock>
-      <h2>제목</h2>
+      <h2>
+        <Link to={`/@${user.username}/${_id}`}>{title}</Link>
+      </h2>
       <SubInfo>
         <span>
           <b>username</b>
         </span>
-        <span>{new Date().toLocaleDateString()}</span>
+        <span>{new Date(publishedDate)}</span>
       </SubInfo>
-      <Tags>
-        <div className="tag">#태그1</div>
-        <div className="tag">#태그2</div>
-      </Tags>
-      <p>포스트 내용의 일부</p>
+      <Tags tags={tags} />
+      <p>{body}</p>
     </PostItemBlock>
   );
 };
 
-const PostList = () => {
+const PostList = ({ posts, loading, error, showWriteButton }) => {
+  console.log(posts);
+  if (error) {
+    return <PostListBlock>에러가 발생했습니다.</PostListBlock>;
+  }
   return (
     <PostListBlock>
       <WritePostButtonWrapper>
-        <Button cyan to="/write">
-          새 글 작성하기
-        </Button>
-        <div>
-          <PostItem />
-          <PostItem />
-          <PostItem />
-        </div>
+        {showWriteButton && (
+          <Button cyan to="/write">
+            새 글 작성하기
+          </Button>
+        )}
       </WritePostButtonWrapper>
+      {!loading && posts && (
+        <div>
+          {posts.map((post) => (
+            <PostItem post={post} key={post._id} />
+          ))}
+        </div>
+      )}
     </PostListBlock>
   );
 };
