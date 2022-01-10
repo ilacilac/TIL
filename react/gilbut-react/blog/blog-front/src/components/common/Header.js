@@ -51,7 +51,6 @@ const Header = ({ user, onLogout }) => {
             </div>
           ) : (
             <div className="right">
-              <UserInfo>{user.username}</UserInfo>
               <Button to="/login">로그인</Button>
             </div>
           )}
