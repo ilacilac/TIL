@@ -39,3 +39,13 @@ dispath({
   임시 / 완료
 - item의 input 변경될 때 : [input, setInput] = useState('');
 - item 저장할 때 : dispatch()
+
+## 26장
+
+코드 작성하기전에 생각하기 (플로우를 먼저 적자)
+
+## 27장
+
+onEdit
+JSX
+useEffect
