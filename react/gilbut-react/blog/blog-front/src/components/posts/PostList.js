@@ -46,12 +46,10 @@ const PostItem = ({ post }) => {
       <h2>
         <Link to={`/@${user.username}/${_id}`}>{title}</Link>
       </h2>
-      <SubInfo>
-        <span>
-          <b>username</b>
-        </span>
-        <span>{new Date(publishedDate)}</span>
-      </SubInfo>
+      <SubInfo
+        username={user.username}
+        publishedDate={new Date(publishedDate)}
+      />
       <Tags tags={tags} />
       <p>{body}</p>
     </PostItemBlock>
@@ -59,7 +57,6 @@ const PostItem = ({ post }) => {
 };
 
 const PostList = ({ posts, loading, error, showWriteButton }) => {
-  console.log(posts);
   if (error) {
     return <PostListBlock>에러가 발생했습니다.</PostListBlock>;
   }

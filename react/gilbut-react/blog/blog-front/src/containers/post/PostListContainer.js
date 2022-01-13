@@ -15,6 +15,7 @@ const PostListContainer = ({ location }) => {
       user: user.user,
     }),
   );
+
   useEffect(() => {
     const { tag, username, page } = qs.parse(location.search, {
       ignoreQueryPrefix: true,
