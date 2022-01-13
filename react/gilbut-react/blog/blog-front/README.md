@@ -49,3 +49,34 @@ dispath({
 onEdit
 JSX
 useEffect
+
+---
+
+포스트 수정
+
+- 글쓰기 수정 버튼 component
+- 수정 FORM component
+- 수정 FORM reducer(api)
+- 수정 FORM container
+- 수정 page - app
+- 삭제버튼 - postview
+
+포스트 삭제
+
+- 글쓰기 삭제 버튼 component
+- 삭제 FORM reducer(api)
+- 삭제 FORM container
+- 삭제버튼 - postview
+- 모달 - 공통컴포넌트
+
+react-helmet-async
+
+- SEO?
+
+---
+
+- 수정, 삭제버튼 : 하나의 component - PostActionButtons
+  - props => jsx
+    이유 : 안그러면 PostActionButtonsContainer을 만들어줘야됨
+
+---
