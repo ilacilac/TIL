@@ -52,6 +52,13 @@ useEffect
 
 ---
 
+27장
+
+1. ownPost 영역 확인 - PostViewerContainer
+2. onRemove
+
+---
+
 포스트 수정
 
 - 글쓰기 수정 버튼 component
