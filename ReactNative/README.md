@@ -20,7 +20,14 @@ export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 ```
 
-`npx react-native init LearnReactNative`
+`npx react-native init LearnReactNative c`
+
+---
+
+## Develop Mode(MAC)
+
+IOS : CMD + D
+Android : CMD + M
 
 ---
 
