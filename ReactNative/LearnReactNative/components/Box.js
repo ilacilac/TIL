@@ -29,18 +29,18 @@ const styles = StyleSheet.create({
   rounded: {
     borderRadius: 16,
   },
-  small: {
-    width: 32,
-    height: 32,
-  },
-  medium: {
-    width: 64,
-    height: 64,
-  },
-  large: {
-    width: 128,
-    height: 128,
-  },
+  // small: {
+  //   width: 32,
+  //   height: 32,
+  // },
+  // medium: {
+  //   width: 64,
+  //   height: 64,
+  // },
+  // large: {
+  //   width: 128,
+  //   height: 128,
+  // },
   // ming
   boxSize: {
     small: {
