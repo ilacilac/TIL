@@ -31,6 +31,31 @@ Android : CMD + M
 
 ---
 
+## StyleSheet Rule
+
+```jsx
+const style = StyleSheet.create({
+  container: {
+    backgroundColor: "black",
+    color: "white",
+    borderWidth: 4,
+    borderStyle: "solid",
+    borderColor: "blue",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+});
+```
+
+- Selector 개념이 없다.
+- camelCase
+- display: flex(default : flexDirection : column) | none
+- 숫자 단위 : dp
+- background -> backgroundColor
+- border -> borderWidth, borderStyle, borderColor
+
 ## Install Issue
 
 - node version 16.13.2(stable)
