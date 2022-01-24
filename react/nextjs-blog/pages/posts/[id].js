@@ -10,6 +10,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({params}) {
+  // params : { id: 'pre-rendering' }
+  console.log('params', params);
   const postData = getPostData(params.id);
   return {
     props: {

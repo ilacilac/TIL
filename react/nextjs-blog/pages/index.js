@@ -5,7 +5,7 @@ import utilStyles from '../styles/utils.module.css';
 import { getSortedPostData } from '../lib/posts';
 
 export async function getStaticProps() {
-  const allPostsData = getSortedPostData();
+  const allPostsData = getSortedPostData();  
   return {
     props: {
       allPostsData
