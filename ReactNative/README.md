@@ -56,7 +56,38 @@ const style = StyleSheet.create({
 - background -> backgroundColor
 - border -> borderWidth, borderStyle, borderColor
 
-## Install Issue
+PPI(Pixel Per Inch) : Display
+DPI(Dot Per Inch) : 인쇄물
+**DP(Density-independent pixel) : 1인치당 픽셀 밀도에 따라 크기가 일관된 UI를 보여주는 단위**
+
+- dp = px \* 160 / ppi
+- px = dp \* ppi / 160
+  > ex) iPhone11Pro - 200이미지 : 200 \* 458 / 160 = 572.5px
+
+## Device test
+
+### IOS
+
+디바이스 리스트
+`$ xcrun simctl list devices`
+`$ yarn react-native run-ios --simulator="iPhone 5s"`
+
+### Android
+
+Android Virtual Device Manager를 열어
+Create Virtual Device 버튼을 눌러 새 디바이스를 추가
+
+## Issue
+
+### Install
 
 - node version 16.13.2(stable)
 - ruby version 2.6.0
+
+### IOS keyboard
+
+- command + k
+
+### Error : no bundle url present
+
+- `rm -rf ios/build`
