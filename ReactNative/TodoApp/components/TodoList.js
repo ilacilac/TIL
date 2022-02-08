@@ -2,7 +2,7 @@ import React from 'react';
 import {FlatList, View, StyleSheet} from 'react-native';
 import TodoItem from './TodoItem';
 
-function TodoList({todos, onToggle}) {
+function TodoList({todos, onToggle, onRemove}) {
   return (
     <FlatList
       ItemSeparatorComponent={() => <View style={styles.separator} />}
@@ -14,6 +14,7 @@ function TodoList({todos, onToggle}) {
           text={item.text}
           done={item.done}
           onToggle={onToggle}
+          onRemove={onRemove}
         />
       )}
       keyExtractor={item => item.id.toString()}

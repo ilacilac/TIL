@@ -36,3 +36,5 @@ allprojects {
         maven { url 'https://www.jitpack.io' }
     }
 }
+
+apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
