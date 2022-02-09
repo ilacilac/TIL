@@ -1,10 +1,13 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {KeyboardAvoidingView, Platform, StyleSheet} from 'react-native';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-community/async-storage';
+
 import AddTodo from './components/AddTodo';
 import DateHead from './components/DateHead';
 import Empty from './components/Empty';
 import TodoList from './components/TodoList';
+import todosStorage from './storage/todosStorage';
 
 const App = () => {
   const today = new Date();
@@ -14,6 +17,31 @@ const App = () => {
     {id: 2, text: '리액트 네이티브 기초 공부', done: false},
     {id: 3, text: '투두리스트 만들어보기', done: false},
   ]);
+  useEffect(() => {
+    // async function load() {
+    //   try {
+    //     const rawTodos = await AsyncStorage.getItem('todos');
+    //     const savedTodos = JSON.parse(rawTodos);
+    //     setTodos(savedTodos);
+    //   } catch (e) {
+    //     console.log('Failed to load todos');
+    //   }
+    // }
+    // load();
+    todosStorage.get().then(setTodos).catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    // async function save() {
+    //   try {
+    //     await AsyncStorage.setItem('todos', JSON.stringify(todos));
+    //   } catch (e) {
+    //     console.log('Failed to save todos');
+    //   }
+    // }
+    // save();
+    todosStorage.set(todos).catch(console.error);
+  }, [todos]);
 
   const onInsert = text => {
     const nextId =

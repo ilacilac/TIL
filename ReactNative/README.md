@@ -22,6 +22,11 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 `npx react-native init LearnReactNative c`
 
+```bash
+cd ios
+pod install
+```
+
 ---
 
 ## Develop Mode(MAC)

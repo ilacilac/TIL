@@ -12,8 +12,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 function TodoItem({id, text, done, onToggle, onRemove}) {
   const remove = () => {
     Alert.alert(
-      '삭제',
-      '정말로 삭제하시겠어요?',
+      '삭제', // 제목
+      '정말로 삭제하시겠어요?', // 내용
+      // 버튼 배열
       [
         {
           text: '취소',
@@ -28,6 +29,9 @@ function TodoItem({id, text, done, onToggle, onRemove}) {
           style: 'destructive',
         },
       ],
+      // 옵션 객체
+      // cancelable : Alert박스 바깥영역 터치 / back버튼 클릭 시, Alert 닫히도록
+      // onDismiss : Alert 닫힐 때, 호출
       {
         cancelable: true,
         onDismiss: () => {},
