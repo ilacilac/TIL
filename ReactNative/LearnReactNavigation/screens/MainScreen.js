@@ -1,6 +1,5 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createDrawerNavigator} from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Button, Text, View} from 'react-native';
 
@@ -50,7 +49,7 @@ function MainScreen() {
         tabBarActiveTintColor: '#fb8c00',
         tabBarShowLabel: false,
       }}>
-      <Tab.SearchScreen
+      <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
@@ -60,17 +59,17 @@ function MainScreen() {
           ),
         }}
       />
-      <Tab.SearchScreen
+      <Tab.Screen
         name="Search"
         component={SearchScreen}
         options={{
           title: '검색',
           tabBarIcon: ({color, size}) => (
-            <Icon name="home" color={color} size={size} />
+            <Icon name="search" color={color} size={size} />
           ),
         }}
       />
-      <Tab.SearchScreen
+      <Tab.Screen
         name="Notification"
         component={NotificationScreen}
         options={{
@@ -80,7 +79,7 @@ function MainScreen() {
           ),
         }}
       />
-      <Tab.SearchScreen
+      <Tab.Screen
         name="Message"
         component={MessageScreen}
         options={{
