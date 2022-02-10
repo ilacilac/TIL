@@ -96,3 +96,17 @@ Create Virtual Device 버튼을 눌러 새 디바이스를 추가
 ### Error : no bundle url present
 
 - `rm -rf ios/build`
+
+### Error: Reanimated 2 failed to create a worklet, maybe you forgot to add Reanimated's babel plugin?
+
+```js
+// babel.config.js
+module.exports = {
+  presets: ['module:metro-react-native-babel-preset'],
+  plugins: ['react-native-reanimated/plugin'],
+};
+```
+`npx react-native start --reset-cache`
+
+출처 : 
+https://javascript.plainenglish.io/error-reanimated-2-failed-to-create-a-worklet-maybe-you-forgot-to-add-reanimateds-babel-plugin-525c6003024c
