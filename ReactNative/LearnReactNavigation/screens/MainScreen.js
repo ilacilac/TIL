@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Button, Text, View} from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import {useFocusEffect} from '@react-navigation/native';
 
 // const Tab = createBottomTabNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -44,6 +45,20 @@ function MessageScreen() {
 }
 
 function MainScreen() {
+  useFocusEffect(
+    useCallback(() => {
+      console.log('이 화면을 보고 있어요.');
+      return () => {
+        console.log('다른 화면을 보고있어요.');
+      };
+    }, []),
+  );
+  // useEffect(() => {
+  //   console.log('mounted');
+  //   return () => {
+  //     console.log('unmounted');
+  //   };
+  // }, []);
   return (
     <Tab.Navigator initialRouteName="Home">
       <Tab.Screen
