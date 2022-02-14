@@ -12,7 +12,7 @@ function MainTab() {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false,
+        // headerShown: false,
         tabBarActiveTintColor: '#9d64d6',
       }}>
       <Tab.Screen
