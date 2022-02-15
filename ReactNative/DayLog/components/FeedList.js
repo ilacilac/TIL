@@ -3,12 +3,18 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import FeedListItem from './FeedListItem';
 
 function FeedList({logs, onScrolledToBottom}) {
+  if (!onScrolledToBottom) {
+    return;
+  }
   const onScroll = e => {
     const {contentSize, layoutMeasurement, contentOffset} = e.nativeEvent;
     const distanceFromBottom =
       contentSize.height - layoutMeasurement.height - contentOffset.y;
 
-    if (distanceFromBottom < 72) {
+    if (
+      distanceFromBottom < 72 &&
+      contentSize.height > layoutMeasurement.height
+    ) {
       onScrolledToBottom(true);
     } else {
       onScrolledToBottom(false);
