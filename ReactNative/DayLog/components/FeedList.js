@@ -3,7 +3,7 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import FeedListItem from './FeedListItem';
 
 function FeedList({logs, onScrolledToBottom}) {
-  if (!onScrolledToBottom) {
+  if (!onScrolledToBottom && !logs) {
     return;
   }
   const onScroll = e => {

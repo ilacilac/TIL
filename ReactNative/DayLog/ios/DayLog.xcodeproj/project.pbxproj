@@ -160,7 +160,6 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				1FA2FEF1E8AD4299A24D7DC2 /* [CP] Embed Pods Frameworks */,
 				30B571C258D3CD83D3C8BD81 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -183,7 +182,6 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				3A4FE71ABB4849AB6AE19939 /* [CP] Embed Pods Frameworks */,
 				7C06189D9360EAFCDED23101 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -265,23 +263,6 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		1FA2FEF1E8AD4299A24D7DC2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DayLog-DayLogTests/Pods-DayLog-DayLogTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DayLog-DayLogTests/Pods-DayLog-DayLogTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DayLog-DayLogTests/Pods-DayLog-DayLogTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		30B571C258D3CD83D3C8BD81 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -297,23 +278,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DayLog-DayLogTests/Pods-DayLog-DayLogTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3A4FE71ABB4849AB6AE19939 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DayLog/Pods-DayLog-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DayLog/Pods-DayLog-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DayLog/Pods-DayLog-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6EFC69469672006AD339E77F /* [CP] Check Pods Manifest.lock */ = {
