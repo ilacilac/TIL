@@ -69,6 +69,85 @@ DPI(Dot Per Inch) : 인쇄물
 - px = dp \* ppi / 160
   > ex) iPhone11Pro - 200이미지 : 200 \* 458 / 160 = 572.5px
 
+## Library
+
+- Navigation (Stack / Tab)
+
+  1. Library 설치
+
+  ```bash
+  yarn add @react-navigation/native react-native-screens react-native-safe-area-context # 뒤에 두개는 의존성 라이브러리
+  yarn add @react-navigation/native-stack # 링크, 뒤로가기, 앞으로가기(브라우저의 History와 비슷한 사용성 제공 / 스택자료구조)
+  yarn add @react-navigation/bottom-tabs
+  ```
+
+  2. NavigationContainer 컴포넌트로 감싸주기
+
+  ```js
+  import React from 'react';
+  import {NavigationContainer} from '@react-navigation/native";
+
+  function App() {
+    return <NavigationContainer>{/* 네비게이션 설정 */}</NavigationContainer>
+  }
+
+  export default App;
+  ```
+
+  3. Stack Navigation 적용
+     아래 Screen으로 사용된 컴포넌트는 navigation이라는 객체를 props로 받아서 다른화면으로 이동 가능
+     `navigation.navigate('Detail')`
+
+  ```js
+  import React from "react";
+  import { NavigationContainer } from "@react-navigation/native";
+  import { createNativeStackNavigator } from "@react-navigation/native-stack";
+  import HomeScreen from "./screens/HomeScreen";
+  import DetailScreen from "./screens/DetailScreen";
+
+  const Stack = createNativeStackNavigator();
+
+  function App() {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Detail" component={DetailScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
+
+  export default App;
+  ```
+
+  4. Tab Navigation 적용
+
+  ```js
+  import React from "react";
+  import { NavigationContainer } from "@react-navigation/native";
+  import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+  const Tab = createBottomTabNavigator();
+
+  function App() {
+    return (
+      <NavigationContainer>
+        <Tab.Navigator initialRouteName="Home">
+          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="Search" component={SearchScreen} />
+          <Tab.Screen name="Notification" component={NotificationScreen} />
+          <Tab.Screen name="Message" component={MessageScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    );
+  }
+
+  export default App;
+  ```
+
+-
+
 ## Device test
 
 ### IOS
@@ -102,11 +181,12 @@ Create Virtual Device 버튼을 눌러 새 디바이스를 추가
 ```js
 // babel.config.js
 module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
-  plugins: ['react-native-reanimated/plugin'],
+  presets: ["module:metro-react-native-babel-preset"],
+  plugins: ["react-native-reanimated/plugin"],
 };
 ```
+
 `npx react-native start --reset-cache`
 
-출처 : 
+출처 :
 https://javascript.plainenglish.io/error-reanimated-2-failed-to-create-a-worklet-maybe-you-forgot-to-add-reanimateds-babel-plugin-525c6003024c
