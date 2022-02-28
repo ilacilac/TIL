@@ -20,7 +20,7 @@ function SearchScreen({navigation}) {
     return <EmptySearchResult type="EMPTY_KEYWORD" />;
   }
 
-  if (filtered.length === '') {
+  if (filtered.length === 0) {
     return <EmptySearchResult type="NOT_FOUND" />;
   }
   return (

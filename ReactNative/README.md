@@ -146,7 +146,11 @@ DPI(Dot Per Inch) : 인쇄물
   export default App;
   ```
 
--
+- AsyncStorage
+
+```js
+import AsyncStorage from "@react-native-community/async-storage";
+```
 
 ## Device test
 

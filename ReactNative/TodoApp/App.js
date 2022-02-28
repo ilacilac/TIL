@@ -44,6 +44,9 @@ const App = () => {
   }, [todos]);
 
   const onInsert = text => {
+    if (!text) {
+      return;
+    }
     const nextId =
       todos.length > 0 ? Math.max(...todos.map(todo => todo.id)) + 1 : 1;
     const todo = {
