@@ -128,3 +128,17 @@ aria-labelledby를 제공해주는 경우도 있다.
 - 웹에서 표준적으로 사용되는 기술이나 규칙
 - 다양한 플랫폼 및 장치, 웹 브라우저 등의 모든 환경에서 작동해야 함으로 접근성이 향상된다.
 - 웹 표준 관련 기술 : (X)HTML / CSS / SCRIPT
+
+### example 1
+
+```html
+<span class="divider">ㅣ</span>
+```
+
+위와같이 주면 스크린리더기에서 "이" 라고 읽음 그래서
+
+```html
+<span class="divider" aria-hidden="true">ㅣ</span>
+```
+
+디자인은 존재하나 스크린리더기에서 읽히지 않도록 `aria-hidden` 속성을 준다.
