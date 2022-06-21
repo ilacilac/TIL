@@ -142,3 +142,7 @@ aria-labelledby를 제공해주는 경우도 있다.
 ```
 
 디자인은 존재하나 스크린리더기에서 읽히지 않도록 `aria-hidden` 속성을 준다.
+
+https://seulbinim.github.io/WSA/accessibility.html
+https://yam-cha.tistory.com/190
+https://m.blog.naver.com/kt1641/221761755957
