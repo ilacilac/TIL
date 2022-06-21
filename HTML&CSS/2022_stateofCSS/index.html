@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @layer reset, default, components;
+      @layer reset {
+        .container {
+          margin: 0;
+          padding: 0;
+          ul,
+          li,
+          ol {
+            list-style: none;
+          }
+        }
+      }
+      @layer components {
+        .container {
+          background: #333333;
+        }
+      }
+      @layer default {
+        .container {
+          background: #ffffff;
+        }
+        h1 {
+          color: #ffffff;
+        }
+        p {
+          color: #f2f2f2;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="container">
+      <h1>Heading tag</h1>
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi,
+        voluptatem.
+      </p>
+    </section>
+  </body>
+</html>
