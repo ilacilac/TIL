@@ -3,7 +3,17 @@
 
 const args = process.argv;
 const fs = require("fs");
+const os = require("os");
 const fsPromise = require("fs/promises");
+const path = require("path");
+
+const folder = args[2];
+const workingDir = path.join(os.homedir(), "Pictures", folder);
+console.log(workingDir); // /Users/ming/Pictures/test
+
+// TODO
+// 1. workingDir -> photoDir 수정
+// 2.
 
 const photoPath = `./${args[2]}`;
 const videoPath = `./${photoPath}/video`;
@@ -18,6 +28,10 @@ const renameFileAsync = async (oldPath, newPath) => {
   }
 };
 
+if (!photoPath) {
+  console.error("Please enter folder name in pictures");
+}
+
 fs.readdir(photoPath, "utf-8", (error, files) => {
   if (error) {
     console.error(error);
@@ -29,7 +43,6 @@ fs.readdir(photoPath, "utf-8", (error, files) => {
     if (file.includes(".mov") || file.includes(".mp4")) {
       if (!fs.existsSync(videoPath)) {
         fs.mkdirSync(videoPath);
-        console.log("video");
       }
       renameFileAsync(`${photoPath}/${file}`, `${videoPath}/${file}`);
     }
