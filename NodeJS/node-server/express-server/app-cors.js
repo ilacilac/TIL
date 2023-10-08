@@ -21,8 +21,8 @@ app.use(morgan("combined"));
 app.use(cors(corsOption));
 
 // 공통적으로 필요한 보안에 관련한 헤더속성을 지정함.
-app.use(helmet());
 
+app.use(helmet());
 // app.use((req, res, next) => {
 //   res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
 //   res.setHeader(

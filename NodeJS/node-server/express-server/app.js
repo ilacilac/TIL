@@ -3,13 +3,14 @@ import express from "express";
 const app = express();
 
 app.all("/api", (req, res, next) => {
-  // 명확하게 /api 에서만
+  // 명확하게 /api 에서만 작동
   console.log("all");
   next();
 });
 
 app.use("/sky", (req, res, next) => {
   // 하위 파라미터에서도 동작
+  // ex) /sky/1
   console.log("use");
   next();
 });
